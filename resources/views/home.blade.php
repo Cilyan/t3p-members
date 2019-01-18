@@ -14,7 +14,14 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <p>You are logged in!</p>
+                    <p>
+                        <ul>
+                            <li>Name: {{ $user->name }}</li>
+                            <li>Email: {{ $user->email }}</li>
+                            <li>ID: {{ $user->id }}</li>
+                        </ul>
+                    </p>
                 </div>
             </div>
         </div>

@@ -69,6 +69,16 @@
                             </div>
                         </div>
                     </form>
+
+                    <hr class="my-4">
+                    <div class="text-center">
+                        <a href="{{ route('login.social', ['provider' => 'google']) }}" class="btn btn-google">
+                            Sign in with Google
+                        </a>
+                        <a href="{{ route('login.social', ['provider' => 'facebook']) }}" class="btn btn-facebook">
+                            Sign in with Facebook
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
