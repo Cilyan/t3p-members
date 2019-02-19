@@ -21,3 +21,5 @@ Route::group(['prefix' => 'auth'], function() {
     Route::get('/login/{provider}/callback', 'Auth\SocialLoginController@callback');
 });
 
+Route::resource('profile', 'ProfileController')->except(['index', 'show']);
+Route::get('profile/{profile}/delete', 'ProfileController@delete')->name('profile.delete');
