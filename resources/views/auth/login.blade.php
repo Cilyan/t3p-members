@@ -8,6 +8,11 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
+                    @if (session('status-error'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('status-error') }}
+                        </div>
+                    @endif
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -67,14 +72,7 @@
                     </form>
 
                     <hr class="my-4">
-                    <div class="text-center">
-                        <a href="{{ route('login.social', ['provider' => 'google']) }}" class="btn btn-google">
-                            Sign in with Google
-                        </a>
-                        <a href="{{ route('login.social', ['provider' => 'facebook']) }}" class="btn btn-facebook">
-                            Sign in with Facebook
-                        </a>
-                    </div>
+                    @include('auth.shared.social_providers')
                 </div>
             </div>
         </div>

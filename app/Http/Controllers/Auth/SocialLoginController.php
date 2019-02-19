@@ -6,6 +6,7 @@ use Socialite;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Auth\RedirectsUsers;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\SocialLogin;
@@ -13,6 +14,17 @@ use App\SocialLogin;
 
 class SocialLoginController extends Controller
 {
+    use RedirectsUsers;
+
+    /**
+     * Where to redirect users after verification.
+     *
+     * @return string
+     */
+    protected function redirectTo() {
+        return route('home');
+    }
+
     /**
      * Redirect the user to the Provider authentication page.
      *
@@ -44,7 +56,8 @@ class SocialLoginController extends Controller
         }
 
         if (empty($request->input("code"))) {
-            return redirect()->route("login");
+            return redirect()->route("login")
+                ->with('status-error', trans("auth.social_failed"));
         }
 
         $socialUserObject = Socialite::driver($provider)->user();
@@ -56,6 +69,7 @@ class SocialLoginController extends Controller
             ->first();
 
         $user = null;
+        $passwordWasReset = false;
 
         if (empty($socialLogin)) {
             // try to find user by email, or create one
@@ -63,15 +77,30 @@ class SocialLoginController extends Controller
                 abort(505, "Email not provided");
             }
 
-            $user = User::firstOrCreate(
-                [
-                    'email' => $socialUserObject->getEmail()
-                ],
-                [
-                    'name' => $socialUserObject->getName(),
-                    'password' => Hash::make(str_random(256)),
-                ]
-            );
+            $user =
+                User::where('email', $socialUserObject->getEmail())
+                ->first();
+
+            if (!empty($user)) {
+                /* Verify that user verified their email. */
+                /* If they didn't, invalidate password. */
+                /* This is done to prevent that someone registers an account */
+                /* with a mail it doesn't own, and then waits for the real */
+                /* owner to log in using social account. */
+                if (!$user->hasVerifiedEmail()) {
+                    $user->password = Hash::make(str_random(256));
+                    $user->save();
+                    $user->markEmailAsVerified();
+                    $passwordWasReset = true;
+                }
+            }
+            else {
+                $user = new User();
+                $user->name = $socialUserObject->getName();
+                $user->password = Hash::make(str_random(256));
+                $user->save();
+                $user->markEmailAsVerified();
+            }
 
             $socialLogin = new SocialLogin();
 
@@ -88,6 +117,12 @@ class SocialLoginController extends Controller
 
         auth()->login($user);
 
-        return redirect()->intended('home');
+        $response = redirect()->intended($this->redirectPath());
+
+        if ($passwordWasReset) {
+            $response->with('status', trans('auth.social_password_reset'));
+        }
+
+        return $response;
     }
 }
