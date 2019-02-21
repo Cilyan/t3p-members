@@ -98,6 +98,7 @@ class SocialLoginController extends Controller
                 $user = new User();
                 $user->name = $socialUserObject->getName();
                 $user->password = Hash::make(str_random(256));
+                $user->email = $socialUserObject->getEmail();
                 $user->save();
                 $user->markEmailAsVerified();
             }
