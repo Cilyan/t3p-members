@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <div class="row">
+        <div class="col-md-6">
             <div class="card">
-                <div class="card-header">{{ __("Participants") }}</div>
+                <div class="card-header">{{ __("Editions") }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -13,18 +13,17 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    @if ($profiles->isNotEmpty())
+                    @if ($editions->isNotEmpty())
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <tbody>
-                                    @foreach ($profiles as $profile)
+                                    @foreach ($editions as $edition)
                                         <tr>
-                                            <td><img src="https://robohash.org/{{ $profile->slug() }}?set=set4&amp;size=64x64" style="vertical-align: middle; width: 32px; height: 32px;  border-radius: 50%;"></td>
-                                            <td>{{ $profile->first_name }}</td>
-                                            <td>{{ $profile->last_name }}</td>
+                                            <td>{{ $edition->id }}</td>
+                                            <td>{{ $edition->trail_date }}</td>
                                             <td class="text-right">
-                                                <a href="{{ route('profile.show', ['profile' => $profile]) }}" class="btn btn-secondary" role="button">
-                                                    <i class="fas fa-eye"></i><span class="d-none d-sm-inline"> {{  __('View') }}</span>
+                                                <a href="{{ route('edition.edit', ['edition' => $edition]) }}" class="btn btn-secondary" role="button">
+                                                    <i class="fas fa-edit"></i><span class="d-none d-sm-inline"> {{  __('Edit') }}</span>
                                                 </a>
                                             </td>
                                         </tr>
@@ -34,7 +33,7 @@
                         </div>
                     @else
                         <div class="alert alert-light" role="alert">
-                            {{ __('No participants yet.') }}
+                            {{ __('No editions yet. Create one!') }}
                         </div>
                     @endif
                     <div>

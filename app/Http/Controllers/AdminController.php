@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Edition;
 
-class HomeController extends Controller
+class AdminController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -15,6 +16,7 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('verified');
+        $this->middleware('isadmin');
     }
 
     /**
@@ -24,22 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home', [
+        return view('admin.home', [
             "user" => auth()->user(),
-            "profiles" => auth()->user()->profiles
-        ]);
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function account()
-    {
-        return view('home', [
-            "user" => auth()->user(),
-            "profiles" => auth()->user()->profiles
+            "editions" => Edition::all()
         ]);
     }
 }

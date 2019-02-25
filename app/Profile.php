@@ -3,6 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+use App\User;
+use App\Helper;
+use App\Edition;
 
 class Profile extends Model
 {
@@ -20,6 +24,21 @@ class Profile extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
+    }
+
+    public function helper(Edition $edition)
+    {
+        return $this->hasMany(Helper::class)
+            ->where('helper.edition_id', $edition->id)->first();
+    }
+
+    public function helpers()
+    {
+        return $this->hasMany(Helper::class);
+    }
+
+    public function slug() {
+        return Str::slug($this->first_name . " " . $this->last_name . " " . $this->id);
     }
 }

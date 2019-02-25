@@ -29,6 +29,15 @@ class User extends Authenticatable implements MustVerifyEmail
         'password', 'remember_token',
     ];
 
+    /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'is_admin' => false,
+    ];
+
     public function social_logins()
     {
         return $this->hasMany(SocialLogin::class);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Profile;
+use App\Edition;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProfileRequest;
 
@@ -43,8 +44,8 @@ class ProfileController extends Controller
     public function store(ProfileRequest $request)
     {
         $validated = $request->validated();
-        auth()->user()->profiles()->create($validated);
-        return redirect()->intended(route('home'))->with(
+        $profile = auth()->user()->profiles()->create($validated);
+        return redirect()->route('profile.show', ['profile' => $profile])->with(
             'status', trans('Participant created.')
         );
     }
@@ -57,7 +58,14 @@ class ProfileController extends Controller
      */
     public function show(Profile $profile)
     {
-        //
+        $editions = Edition::whereDoesntHave(
+            'all_helpers',
+            function ($query) use ($profile) {
+                $query->where('profile_id', $profile->id);
+            }
+        )->get();
+        $helpers = $profile->helpers()->with('edition')->get();
+        return view('profile.show', compact('profile', 'editions', 'helpers'));
     }
 
     /**
@@ -84,7 +92,7 @@ class ProfileController extends Controller
         $validated = $request->validated();
         $profile->update($validated);
         $profile->save();
-        return redirect()->intended(route('home'))->with(
+        return redirect()->route('profile.show', ['profile' => $profile])->with(
             'status', trans('Participant updated.')
         );
     }

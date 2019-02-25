@@ -170,19 +170,14 @@
 
                         <div class="form-group row">
                             @if($edit)
-                                <div class="col-md-6 pb-3 pb-md-0">
+                                <div class="col-sm-8 pb-3 pb-sm-0">
                                     <button type="submit" class="btn btn-primary btn-block">
                                         <i class="fas fa-edit"></i> {{  __('Edit') }}
                                     </button>
                                 </div>
-                                <div class="col-6 col-md-3">
-                                    <a href="{{ route('home') }}" class="btn btn-light btn-block" role="button">
+                                <div class="col-sm-4">
+                                    <a href="{{ route('profile.show', ['profile' => $profile]) }}" class="btn btn-light btn-block" role="button">
                                         <i class="fas fa-times"></i> {{  __('Cancel') }}
-                                    </a>
-                                </div>
-                                <div class="col-6 col-md-3">
-                                    <a href="{{ route("profile.delete", ['profile' => $profile])}}" class="btn btn-danger btn-block" role="button">
-                                        <i class="fas fa-trash-alt"></i> {{  __('Remove') }}
                                     </a>
                                 </div>
                             @else

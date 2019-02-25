@@ -1,0 +1,170 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Helper;
+use App\Profile;
+use App\Edition;
+use Illuminate\Http\Request;
+use App\Http\Requests\HelperRequest;
+
+class HelperController extends Controller
+{
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('verified');
+        $this->middleware('can:update,helper')->except(
+            ['create', 'store']
+        );
+        $this->middleware('can:update,profile')->only(
+            ['create', 'store']
+        );
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Profile $profile, Edition $edition)
+    {
+        $helper = new Helper();
+        $edit = false;
+        return view('helper.edit', compact('edit', 'helper', 'profile', 'edition'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(HelperRequest $request, Profile $profile, Edition $edition)
+    {
+        $validated = $request->validated();
+        $helper = Helper::make($validated);
+        $helper->profile()->associate($profile);
+        $helper->edition()->associate($edition);
+        $helper->save();
+        return redirect()->intended(
+            route('profile.show', ['profile' => $profile])
+        )->with(
+            'status', trans('Helper profile created.')
+        );
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Helper  $helper
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Helper $helper)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Helper  $helper
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Helper $helper)
+    {
+        $profile = $helper->profile;
+        $edit = true;
+        return view('helper.edit', compact('edit', 'profile', 'helper'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Helper  $helper
+     * @return \Illuminate\Http\Response
+     */
+    public function update(HelperRequest $request, Helper $helper)
+    {
+        $validated = $request->validated();
+        $helper->update($validated);
+        $helper->save();
+        return redirect()->intended(
+            route('profile.show', ['profile' => $helper->profile])
+        )->with(
+            'status', trans('Helper profile updated.')
+        );
+    }
+
+    /**
+     * Activate a helper profile
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Helper  $helper
+     * @return \Illuminate\Http\Response
+     */
+    public function activate(Request $request, Helper $helper)
+    {
+        $helper->active = true;
+        $helper->save();
+        return back();
+    }
+
+    /**
+     * Deactivate a helper profile
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Helper  $helper
+     * @return \Illuminate\Http\Response
+     */
+    public function deactivate(Request $request, Helper $helper)
+    {
+        $helper->active = false;
+        $helper->save();
+        return back();
+    }
+
+    /**
+     * Show a confirmation box for deleting a helper profile.
+     *
+     * @param  \App\Profile  $profile
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Helper $helper)
+    {
+        return view('helper.delete', compact('helper'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Helper  $helper
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Helper $helper)
+    {
+        $profile = $helper->profile;
+        $helper->delete();
+        return redirect()->intended(
+            route('profile.show', ['profile' => $profile])
+        )->with(
+            'status', trans('Helper profile removed.')
+        );
+    }
+}
