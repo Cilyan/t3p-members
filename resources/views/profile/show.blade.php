@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-lg-7 pb-3 pb-lg-0">
+        <div class="col-lg-6 col-xl-7 pb-3 pb-lg-0">
             <div class="card">
                 <div class="card-header">{{ $profile->first_name . " " . $profile->last_name }}</div>
 
@@ -53,26 +53,28 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-5">
+        <div class="col-lg-6 col-xl-5">
             <div class="card">
                 <div class="card-header">{{ __('Become Helper') }}</div>
 
-                <div class="card-body">
-                    <div class="list-group list-group-flush">
-                        @foreach ($editions as $edition)
+                <div class="list-group list-group-flush">
+                    @foreach ($editions as $edition)
+                        <div class="list-group-item">
                             <div class="row">
-                                <div class="col-md-4">{{ $edition->trail_date }}</div>
+                                <div class="col-md-4 pb-2 pb-md-0">{{ $edition->trail_date }}</div>
                                 <div class="col-md-8">
                                     <a href="{{ route('helper.create', ['profile' => $profile, 'edition' => $edition]) }}" class="btn btn-primary btn-block" role="button" >
                                         <i class="fas fa-plus"></i> {{  __('Be helper') }}
                                     </a>
                                 </div>
                             </div>
-                        @endforeach
-                        @foreach ($helpers as $helper)
+                        </div>
+                    @endforeach
+                    @foreach ($helpers as $helper)
+                        <div class="list-group-item">
                             <div class="row">
-                                <div class="col-md-4">{{ $helper->edition->trail_date }}</div>
-                                <div class="col-md-5">
+                                <div class="col-md-4 pb-2 pb-md-0">{{ $helper->edition->trail_date }}</div>
+                                <div class="col-md-5 pb-3 pb-md-0">
                                     @if ($helper->active)
                                         <form method="POST" action="{{ route('helper.deactivate', ['helper' => $helper]) }}">
                                             @csrf
@@ -91,12 +93,12 @@
                                 </div>
                                 <div class="col-md-3">
                                     <a href="{{ route('helper.edit', ['helper' => $helper]) }}" class="btn btn-primary btn-block" role="button" >
-                                        <i class="fas fa-edit"></i><span class="d-none d-sm-inline"> {{  __('Edit') }}</span>
+                                        <i class="fas fa-edit"></i> {{  __('Edit') }}
                                     </a>
                                 </div>
                             </div>
-                        @endforeach
-                    </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
