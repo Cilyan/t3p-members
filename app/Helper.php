@@ -27,7 +27,7 @@ class Helper extends Pivot
      * @var array
      */
     protected $attributes = [
-        'active' => false,
+        'active' => true,
     ];
 
     public function profile()
