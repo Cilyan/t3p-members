@@ -46,6 +46,11 @@ class HelperController extends Controller
     {
         $helper = new Helper();
         $edit = false;
+
+        if ($profile->birthday->age >= 18) {
+            $helper->legal_age = true;
+        }
+
         return view('helper.edit', compact('edit', 'helper', 'profile', 'edition'));
     }
 
