@@ -2,10 +2,24 @@
 
 @section('content')
 <div class="container">
+    @if (session('from-profile-creation'))
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex w-100 align-items-center justify-content-between">
+                            <p class="mb-0 font-weight-bold">{{ __('Fill the form below to subscribe as helper for the :edition edition', ['edition' => '2019']) }}</p>
+                            <a href="{{ route('profile.show', ['profile' => $profile]) }}" class='btn btn-primary'><i class="fas fa-clock"></i> {{ __('Later') }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <div class="card">
-                <div class="card-header">{{ __('Participant') }}</div>
+                <div class="card-header">{{ __('Helper Profile') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ $edit ? route('helper.update', ['helper' => $helper]) : route('helper.store', ['profile' => $profile, 'edition' => $edition]) }}">
@@ -138,9 +152,7 @@
 
                         <div class="form-group">
                             <label for="comment">{{ __('Other comments') }}</label>
-                            <textarea class="form-control" id="comment" rows="4"  class="form-control{{ $errors->has('comment') ? ' is-invalid' : '' }}" name="comment">
-                                {{ old('comment', $helper->comment ?? null) }}
-                            </textarea>
+                            <textarea class="form-control" id="comment" rows="4"  class="form-control{{ $errors->has('comment') ? ' is-invalid' : '' }}" name="comment">{{ old('comment', $helper->comment ?? null) }}</textarea>
 
                             @if ($errors->has('comment'))
                                 <span class="invalid-feedback" role="alert">

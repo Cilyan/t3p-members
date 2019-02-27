@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Edition extends Model
 {
@@ -32,5 +33,13 @@ class Edition extends Model
     public function all_helpers()
     {
         return $this->hasMany(Helper::class);
+    }
+
+    public static function active_for_helpers() {
+        return Edition::whereDate(
+            'helper_subscriptions_open', '<=', Carbon::today()->toDateString()
+        )->whereDate(
+            'trail_date', '>=', Carbon::today()->toDateString()
+        );
     }
 }

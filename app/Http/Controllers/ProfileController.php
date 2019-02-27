@@ -45,6 +45,22 @@ class ProfileController extends Controller
     {
         $validated = $request->validated();
         $profile = auth()->user()->profiles()->create($validated);
+
+        // If subscriptions for helpers are open, send user to helper profile
+        // creation. Else, send them to profile display.
+        $active_edition = Edition::active_for_helpers()->first();
+        if ($active_edition) {
+            return redirect()->route(
+                'helper.create', [
+                    'profile' => $profile,
+                    'edition' => $active_edition
+                ]
+            )->with([
+                'status' => trans('Participant created.'),
+                'from-profile-creation' => true,
+            ]);
+        }
+
         return redirect()->route('profile.show', ['profile' => $profile])->with(
             'status', trans('Participant created.')
         );
