@@ -15,6 +15,15 @@ class Edition extends Model
         'id', 'trail_date', 'helper_subscriptions_open'
     ];
 
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'trail_date', 'helper_subscriptions_open'
+    ];
+
     public function helpers()
     {
         return $this->hasMany(Helper::class)->where('helper.active', 1);

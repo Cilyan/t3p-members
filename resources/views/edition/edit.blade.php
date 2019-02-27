@@ -35,7 +35,7 @@
 
                             <div class="form-group col-md-6">
                                 <label for="trail_date">{{ __('Date of the Trail') }}<span class="text-danger">*</span></label>
-                                <input id="trail_date" type="date" class="form-control{{ $errors->has('trail_date') ? ' is-invalid' : '' }}" name="trail_date" value="{{ old('trail_date', $edition->trail_date ?? null) }}" required>
+                                <input id="trail_date" type="date" class="form-control{{ $errors->has('trail_date') ? ' is-invalid' : '' }}" name="trail_date" value="{{ old('trail_date', $edition->trail_date->toDateString() ?? null) }}" required>
 
                                 @if ($errors->has('trail_date'))
                                     <span class="invalid-feedback" role="alert">
@@ -48,7 +48,7 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="helper_subscriptions_open">{{ __('Helpers Subscription Open Date') }}</label>
-                                <input id="helper_subscriptions_open" type="date" class="form-control{{ $errors->has('helper_subscriptions_open') ? ' is-invalid' : '' }}" name="helper_subscriptions_open" value="{{ old('helper_subscriptions_open', $edition->helper_subscriptions_open ?? null) }}">
+                                <input id="helper_subscriptions_open" type="date" class="form-control{{ $errors->has('helper_subscriptions_open') ? ' is-invalid' : '' }}" name="helper_subscriptions_open" value="{{ old('helper_subscriptions_open', $edition->helper_subscriptions_open->toDateString() ?? null) }}">
 
                                 @if ($errors->has('helper_subscriptions_open'))
                                     <span class="invalid-feedback" role="alert">

@@ -33,6 +33,15 @@ class Profile extends Model
         'tshirt_gender' => 'M',
     ];
 
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'birthday',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
