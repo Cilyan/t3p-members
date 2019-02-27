@@ -8,11 +8,6 @@
                 <div class="card-header">{{ __("Participants") }}</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
                     @if ($profiles->isNotEmpty())
                         <div class="table-responsive">
                             <table class="table table-striped">

@@ -8,11 +8,6 @@
                 <div class="card-header">{{ __('Edition') }}</div>
 
                 <div class="card-body">
-                    @if (session('status-error'))
-                        <div class="alert alert-danger" role="alert">
-                            {{ session('status-error') }}
-                        </div>
-                    @endif
                     <form method="POST" action="{{ $edit ? route('edition.update', ['edition' => $edition]) : route('edition.store') }}">
                         @csrf
                         @if ($edit)

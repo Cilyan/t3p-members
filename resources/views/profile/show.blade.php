@@ -8,11 +8,6 @@
                 <div class="card-header">{{ $profile->first_name . " " . $profile->last_name }}</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
                     <dl class="row">
                         <dt class="col-sm-3">{{ __('Birthday') }}</dt>
                         <dd class="col-sm-9">{{ $profile->birthday }}</dd>
