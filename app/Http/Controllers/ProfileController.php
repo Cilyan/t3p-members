@@ -74,13 +74,13 @@ class ProfileController extends Controller
      */
     public function show(Profile $profile)
     {
-        $editions = Edition::whereDoesntHave(
+        $editions = Edition::active_for_helpers()->whereDoesntHave(
             'all_helpers',
             function ($query) use ($profile) {
                 $query->where('profile_id', $profile->id);
             }
         )->get();
-        $helpers = $profile->helpers()->with('edition')->get();
+        $helpers = $profile->helpers_active()->with('edition')->get();
         return view('profile.show', compact('profile', 'editions', 'helpers'));
     }
 

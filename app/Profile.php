@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use App\User;
 use App\Helper;
 use App\Edition;
+use Carbon\Carbon;
 
 class Profile extends Model
 {
@@ -56,6 +57,19 @@ class Profile extends Model
     public function helpers()
     {
         return $this->hasMany(Helper::class);
+    }
+
+    public function helpers_active()
+    {
+        return $this->helpers()->whereHas('edition',
+            function ($query) {
+                $query->whereDate(
+                    'helper_subscriptions_open', '<=', Carbon::today()->toDateString()
+                )->whereDate(
+                    'trail_date', '>=', Carbon::today()->toDateString()
+                );
+            }
+        );
     }
 
     public function slug() {
