@@ -45,8 +45,8 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="birthday">{{ __('Birthday') }}</label>
-                                <input id="birthday" type="date" class="form-control{{ $errors->has('birthday') ? ' is-invalid' : '' }}" name="birthday" value="{{ old('birthday', $profile->birthday ?? null) }}">
+                                <label for="birthday">{{ __('Birthday') }}<span class="text-danger">*</span></label>
+                                <input id="birthday" type="date" class="form-control{{ $errors->has('birthday') ? ' is-invalid' : '' }}" name="birthday" value="{{ old('birthday', $profile->birthday ?? null) }}" required>
 
                                 @if ($errors->has('birthday'))
                                     <span class="invalid-feedback" role="alert">
@@ -56,9 +56,8 @@
                             </div>
 
                             <div class="form-group col-6 col-md-3">
-                                <label for="tshirt_gender">{{ __('Tshirt') }}</label>
-                                <select id="tshirt_gender" class="form-control{{ $errors->has('tshirt_gender') ? ' is-invalid' : '' }}" name="tshirt_gender" >
-                                    <option value=""  {{ old('tshirt_gender', $profile->tshirt_gender ?? null) == null ? 'selected' : '' }}>{{ __('None')}}</option>
+                                <label for="tshirt_gender">{{ __('Tshirt') }}<span class="text-danger">*</span></label>
+                                <select id="tshirt_gender" class="form-control{{ $errors->has('tshirt_gender') ? ' is-invalid' : '' }}" name="tshirt_gender" required>
                                     <option value="M" {{ old('tshirt_gender', $profile->tshirt_gender ?? null) == "M" ? 'selected' : '' }}>{{ __('Man')}}</option>
                                     <option value="F" {{ old('tshirt_gender', $profile->tshirt_gender ?? null) == "F" ? 'selected' : '' }}>{{ __('Woman')}}</option>
                                 </select>
@@ -71,8 +70,8 @@
                             </div>
 
                             <div class="form-group col-6 col-md-3">
-                                <label for="tshirt_size">{{ __('Size') }}</label>
-                                <select id="tshirt_size" class="form-control{{ $errors->has('tshirt_size') ? ' is-invalid' : '' }}" name="tshirt_size">
+                                <label for="tshirt_size">{{ __('Size') }}<span class="text-danger">*</span></label>
+                                <select id="tshirt_size" class="form-control{{ $errors->has('tshirt_size') ? ' is-invalid' : '' }}" name="tshirt_size" required>
                                     <option value="xs"  {{ old('tshirt_size', $profile->tshirt_size ?? null) == "xs" ? 'selected' : '' }}>XS</option>
                                     <option value="s" {{ old('tshirt_size', $profile->tshirt_size ?? null) == "s" ? 'selected' : '' }}>S</option>
                                     <option value="m" {{ old('tshirt_size', $profile->tshirt_size ?? null) == "m" ? 'selected' : '' }}>M</option>
@@ -135,8 +134,8 @@
                             </div>
 
                             <div class="form-group col-12 col-md-5">
-                                <label for="country">{{ __('Country') }}</label>
-                                <input id="country" type="text" class="form-control{{ $errors->has('country') ? ' is-invalid' : '' }}" name="country" value="{{ old('country', $profile->country ?? null) }}" >
+                                <label for="country">{{ __('Country') }}<span class="text-danger">*</span></label>
+                                <input id="country" type="text" class="form-control{{ $errors->has('country') ? ' is-invalid' : '' }}" name="country" value="{{ old('country', $profile->country ?? null) }}" required>
 
                                 @if ($errors->has('country'))
                                     <span class="invalid-feedback" role="alert">

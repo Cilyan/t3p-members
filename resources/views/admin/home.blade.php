@@ -37,7 +37,7 @@
                         </div>
                     @endif
                     <div>
-                        <a href="{{ route('profile.create') }}" class="btn btn-primary btn-lg btn-block" role="button" >
+                        <a href="{{ route('edition.create') }}" class="btn btn-primary btn-lg btn-block" role="button" >
                             <i class="fas fa-plus"></i> {{  __('Add one') }}
                         </a>
                     </div>

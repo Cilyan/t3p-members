@@ -22,6 +22,17 @@ class Profile extends Model
         'premise', 'phone', 'tshirt_size', 'tshirt_gender'
     ];
 
+    /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'country' => 'FR',
+        'tshirt_size' => 'm',
+        'tshirt_gender' => 'M',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
