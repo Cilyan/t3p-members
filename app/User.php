@@ -17,7 +17,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'lang'
+        'name', 'email', 'password',
     ];
 
     /**
@@ -36,7 +36,6 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $attributes = [
         'is_admin' => false,
-        'lang' => 'en',
     ];
 
     public function social_logins()
