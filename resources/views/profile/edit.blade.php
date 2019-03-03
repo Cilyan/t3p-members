@@ -51,7 +51,7 @@
                             </div>
 
                             <div class="form-group col-6 col-md-3">
-                                <label for="tshirt_gender">{{ __('Tshirt') }}<span class="text-danger">*</span></label>
+                                <label for="tshirt_gender">{{ __('T-shirt') }}<span class="text-danger">*</span></label>
                                 <select id="tshirt_gender" class="form-control{{ $errors->has('tshirt_gender') ? ' is-invalid' : '' }}" name="tshirt_gender" required>
                                     <option value="M" {{ old('tshirt_gender', $profile->tshirt_gender ?? null) == "M" ? 'selected' : '' }}>{{ __('Man')}}</option>
                                     <option value="F" {{ old('tshirt_gender', $profile->tshirt_gender ?? null) == "F" ? 'selected' : '' }}>{{ __('Woman')}}</option>

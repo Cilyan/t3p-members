@@ -53,7 +53,7 @@ class EditionController extends Controller
         $validated = $request->validated();
         $edition = Edition::create($validated);
         return redirect()->intended(route('admin.home'))->with(
-            'status', trans('Edition created.')
+            'status', __('Edition created.')
         );
     }
 
@@ -93,7 +93,7 @@ class EditionController extends Controller
         $edition->update($validated);
         $edition->save();
         return redirect()->intended(route('admin.home'))->with(
-            'status', trans('Edition updated.')
+            'status', __('Edition updated.')
         );
     }
 
@@ -118,7 +118,7 @@ class EditionController extends Controller
     {
         $edition->delete();
         return redirect()->intended(route('admin.home'))->with(
-            'status', trans('Edition removed.')
+            'status', __('Edition removed.')
         );
     }
 }

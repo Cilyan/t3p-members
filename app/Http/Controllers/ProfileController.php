@@ -56,13 +56,13 @@ class ProfileController extends Controller
                     'edition' => $active_edition
                 ]
             )->with([
-                'status' => trans('Participant created.'),
+                'status' => __('Participant created.'),
                 'from-profile-creation' => true,
             ]);
         }
 
         return redirect()->route('profile.show', ['profile' => $profile])->with(
-            'status', trans('Participant created.')
+            'status', __('Participant created.')
         );
     }
 
@@ -109,7 +109,7 @@ class ProfileController extends Controller
         $profile->update($validated);
         $profile->save();
         return redirect()->route('profile.show', ['profile' => $profile])->with(
-            'status', trans('Participant updated.')
+            'status', __('Participant updated.')
         );
     }
 
@@ -134,7 +134,7 @@ class ProfileController extends Controller
     {
         $profile->delete();
         return redirect()->intended(route('home'))->with(
-            'status', trans('Participant removed.')
+            'status', __('Participant removed.')
         );
     }
 }

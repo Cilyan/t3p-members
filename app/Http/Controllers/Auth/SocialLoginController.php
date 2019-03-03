@@ -57,7 +57,7 @@ class SocialLoginController extends Controller
 
         if (empty($request->input("code"))) {
             return redirect()->route("login")
-                ->with('status-error', trans("auth.social_failed"));
+                ->with('status-error', __("auth.social_failed"));
         }
 
         $socialUserObject = Socialite::driver($provider)->user();
@@ -121,7 +121,7 @@ class SocialLoginController extends Controller
         $response = redirect()->intended($this->redirectPath());
 
         if ($passwordWasReset) {
-            $response->with('status', trans('auth.social_password_reset'));
+            $response->with('status', __('auth.social_password_reset'));
         }
 
         return $response;

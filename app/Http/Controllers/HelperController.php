@@ -70,7 +70,7 @@ class HelperController extends Controller
         return redirect()->intended(
             route('profile.show', ['profile' => $profile])
         )->with(
-            'status', trans('Helper profile created.')
+            'status', __('Helper profile created.')
         );
     }
 
@@ -113,7 +113,7 @@ class HelperController extends Controller
         return redirect()->intended(
             route('profile.show', ['profile' => $helper->profile])
         )->with(
-            'status', trans('Helper profile updated.')
+            'status', __('Helper profile updated.')
         );
     }
 
@@ -169,7 +169,7 @@ class HelperController extends Controller
         return redirect()->intended(
             route('profile.show', ['profile' => $profile])
         )->with(
-            'status', trans('Helper profile removed.')
+            'status', __('Helper profile removed.')
         );
     }
 }

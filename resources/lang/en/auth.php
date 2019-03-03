@@ -16,6 +16,6 @@ return [
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
     'social_failed' => 'Login using external provider did not succeed',
-    'social_password_reset' => 'Your password was reset, because the attached account did not verify its email address.'
+    'social_password_reset' => 'Your password was reset, because the attached account did not verify its email address. You can request a new one by following the procedure for forgotten passwords.'
 
 ];
