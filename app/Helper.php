@@ -16,7 +16,8 @@ class Helper extends Pivot
     protected $fillable = [
         'phone_provider', 'legal_age', 'first_responder',
         'driving_license', 'driving_license_location',
-        'prefered_activity', 'comment',
+        'prefered_activity', 'comment', 'prefered_sector',
+        'housing',
 
         'sleep_day_before', 'day_before_meal', 'after_event_meal'
     ];

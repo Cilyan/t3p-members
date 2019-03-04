@@ -28,7 +28,9 @@ class CreateHelperTable extends Migration
             $table->boolean('first_responder');
             $table->string('driving_license')->nullable();
             $table->string('driving_license_location')->nullable();
-            $table->string('prefered_activity', 50)->nullable();
+            $table->string('prefered_activity', 30)->nullable();
+            $table->string('housing', 50)->nullable();
+            $table->string('prefered_sector', 10)->nullable();
             $table->text('comment')->nullable();
 
             // TODO: refactor to separate table (custom fields)

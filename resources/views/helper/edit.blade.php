@@ -50,6 +50,33 @@
                             </div>
                         </div>
 
+
+                        <div class="form-check mt-2">
+                            <input id="legal_age" type="hidden" name="legal_age" value="0">
+                            <input id="legal_age" type="checkbox" class="form-check-input{{ $errors->has('legal_age') ? ' is-invalid' : '' }}" name="legal_age" value="1" {{ old('legal_age', $helper->legal_age ?? false) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="legal_age">
+                                {{  __('I will be of legal age at the date of the trail') }}
+                            </label>
+                            @if ($errors->has('legal_age'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('legal_age') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+
+                        <div class="form-check mb-2">
+                            <input id="first_responder" type="hidden" name="first_responder" value="0">
+                            <input id="first_responder" type="checkbox" class="form-check-input{{ $errors->has('first_responder') ? ' is-invalid' : '' }}" name="first_responder" value="1" {{ old('first_responder', $helper->first_responder ?? null) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="first_responder">
+                                {{  __('I have a valid first responder diploma') }}
+                            </label>
+                            @if ($errors->has('first_responder'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('first_responder') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="driving_license">{{ __('Driving License ID') }}</label>
@@ -74,43 +101,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="prefered_activity">{{ __('Prefered Activity') }}</label>
-                            <input id="prefered_activity" type="text" class="form-control{{ $errors->has('prefered_activity') ? ' is-invalid' : '' }}" name="prefered_activity" value="{{ old('prefered_activity', $helper->prefered_activity ?? null) }}">
-
-                            @if ($errors->has('prefered_activity'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('prefered_activity') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-
-                        <div class="form-check mt-2">
-                            <input id="legal_age" type="hidden" name="legal_age" value="0">
-                            <input id="legal_age" type="checkbox" class="form-check-input{{ $errors->has('legal_age') ? ' is-invalid' : '' }}" name="legal_age" value="1" {{ old('legal_age', $helper->legal_age ?? false) ? 'checked' : '' }}>
-                            <label class="form-check-label" for="legal_age">
-                                {{  __('I will be of legal age at the date of the trail') }}
-                            </label>
-                            @if ($errors->has('legal_age'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('legal_age') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-
-                        <div class="form-check">
-                            <input id="first_responder" type="hidden" name="first_responder" value="0">
-                            <input id="first_responder" type="checkbox" class="form-check-input{{ $errors->has('first_responder') ? ' is-invalid' : '' }}" name="first_responder" value="1" {{ old('first_responder', $helper->first_responder ?? null) ? 'checked' : '' }}>
-                            <label class="form-check-label" for="first_responder">
-                                {{  __('I have a valid first responder diploma') }}
-                            </label>
-                            @if ($errors->has('first_responder'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('first_responder') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-
                         <div class="form-check mt-2">
                             <input id="sleep_day_before" type="hidden" name="sleep_day_before" value="0">
                             <input id="sleep_day_before" type="checkbox" class="form-check-input{{ $errors->has('sleep_day_before') ? ' is-invalid' : '' }}" name="sleep_day_before" value="1" {{ old('sleep_day_before', $helper->sleep_day_before ?? null) ? 'checked' : '' }}>
@@ -124,7 +114,18 @@
                             @endif
                         </div>
 
-                        <div class="form-check">
+                        <div class="form-group">
+                            <label for="housing">{{ __('Housing (info/request)') }}</label>
+                            <input id="housing" type="text" class="form-control{{ $errors->has('housing') ? ' is-invalid' : '' }}" name="housing" value="{{ old('housing', $helper->housing ?? null) }}">
+
+                            @if ($errors->has('housing'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('housing') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+
+                        <div class="form-check mt-2">
                             <input id="day_before_meal" type="hidden" name="day_before_meal" value="0">
                             <input id="day_before_meal" type="checkbox" class="form-check-input{{ $errors->has('day_before_meal') ? ' is-invalid' : '' }}" name="day_before_meal" value="1" {{ old('day_before_meal', $helper->day_before_meal ?? null) ? 'checked' : '' }}>
                             <label class="form-check-label" for="day_before_meal">
@@ -146,6 +147,39 @@
                             @if ($errors->has('after_event_meal'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('after_event_meal') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+
+                        <div class="form-group">
+                            <label for="prefered_activity">{{ __('Prefered Activity') }}</label>
+                            <select id="prefered_activity" class="form-control{{ $errors->has('prefered_activity') ? ' is-invalid' : '' }}" name="prefered_activity">
+                                <option value="any"  {{ old('prefered_activity', $helper->prefered_activity ?? null) == "any" ? 'selected' : '' }}>@lang("Any")</option>
+                                <option value="welcoming" {{ old('prefered_activity', $helper->prefered_activity ?? null) == "welcoming" ? 'selected' : '' }}>@lang("Welcoming")</option>
+                                <option value="way_directions" {{ old('prefered_activity', $helper->prefered_activity ?? null) == "way_directions" ? 'selected' : '' }}>@lang("Showing the directions")</option>
+                                <option value="beaconing" {{ old('prefered_activity', $helper->prefered_activity ?? null) == "beaconing" ? 'selected' : '' }}>@lang("Beaconing / Unbeaconing")</option>
+                                <option value="organisation" {{ old('prefered_activity', $helper->prefered_activity ?? null) == "organisation" ? 'selected' : '' }}>@lang("Organisation")</option>
+                                <option value="refreshment_booth" {{ old('prefered_activity', $helper->prefered_activity ?? null) == "refreshment_booth" ? 'selected' : '' }}>@lang("Refreshment booth & Food")</option>
+                                <option value="opener_closer" {{ old('prefered_activity', $helper->prefered_activity ?? null) == "opener_closer" ? 'selected' : '' }}>@lang("Opener / Closer")</option>
+                            </select>
+
+                            @if ($errors->has('prefered_activity'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('prefered_activity') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+
+                        <div class="form-group">
+                            <label for="prefered_sector">{{ __('Prefered Sector') }}</label>
+                            <select id="prefered_sector" class="form-control{{ $errors->has('prefered_sector') ? ' is-invalid' : '' }}" name="prefered_sector">
+                                <option value="any"  {{ old('prefered_sector', $helper->prefered_sector ?? null) == "any" ? 'selected' : '' }}>@lang("Any")</option>
+                                <option value="augirein" {{ old('prefered_sector', $helper->prefered_sector ?? null) == "augirein" ? 'selected' : '' }}>Augirein</option>
+                                <option value="arbas" {{ old('prefered_sector', $helper->prefered_sector ?? null) == "arbas" ? 'selected' : '' }}>Arbas</option>
+                            </select>
+                            @if ($errors->has('prefered_sector'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('prefered_sector') }}</strong>
                                 </span>
                             @endif
                         </div>

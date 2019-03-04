@@ -66,6 +66,7 @@
     "Phone Operator": "Opérateur téléphonique",
     "Postal Code": "Code postal",
     "Prefered Activity": "Activité préférée",
+    "Prefered Sector": "Secteur de prédilection",
     "Register": "S'enregistrer",
     "Remember Me": "Se souvenir de moi",
     "Remove": "Supprimer",
@@ -96,5 +97,13 @@
     "Hello!": "Bonjour!",
     "Regards": "Cordialement",
     "If you’re having trouble clicking the \":actionText\" button, copy and paste the URL below\ninto your web browser: [:actionURL](:actionURL)": "Si vous avez des difficultés à cliquer sur le bouton \":actionText\", copiez et collez le lien ci-dessous\ndans votre navigateur : [:actionURL](:actionURL)",
-    "for": "pour"
+    "for": "pour",
+    "Housing (info/request)": "Logement (info/demande)",
+    "Any": "N'importe",
+    "Welcoming": "Accueil",
+    "Showing the directions": "Aiguillage",
+    "Beaconing \/ Unbeaconing": "Balisage \/ Débalisage",
+    "Organisation": "Organisation",
+    "Refreshment booth & Food": "Buvette & Repas",
+    "Opener \/ Closer": "Ouvreur \/ Serre-file"
 }
