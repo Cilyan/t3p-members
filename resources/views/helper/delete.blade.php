@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Remove helper\'s profile') }}</div>
                 <div class="card-body">
                     <p class="card-text">{{ __('Are you sure you want to remove this helper\'s profile?') }}</p>
-                    <p class="card-text">{{ $helper->id}}</p>
+                    <p class="card-text">{{ $helper->profile->full_name() }} @lang('for') {{ $helper->edition->id }}</p>
                     <form method="POST" action="{{ route('helper.destroy', ['helper' => $helper]) }}">
                         @csrf
                         @method('DELETE')

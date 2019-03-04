@@ -75,4 +75,8 @@ class Profile extends Model
     public function slug() {
         return Str::slug($this->first_name . " " . $this->last_name . " " . $this->id);
     }
+
+    public function full_name() {
+        return $this->first_name . " " . $this->last_name;
+    }
 }
