@@ -79,7 +79,10 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="driving_license">{{ __('Driving License ID') }}</label>
+                                <label for="driving_license">
+                                    {{ __('Driving License ID') }}
+                                    <a href="#" class="text-danger" data-toggle="tooltip" title="@lang("The driver's license number, if you have one, is required for declaration to the prefecture. Please fill it if you can.")"><i class="fas fa-question-circle"></i></a>
+                                </label>
                                 <input id="driving_license" type="text" class="form-control{{ $errors->has('driving_license') ? ' is-invalid' : '' }}" name="driving_license" value="{{ old('driving_license', $helper->driving_license ?? null) }}">
 
                                 @if ($errors->has('driving_license'))
