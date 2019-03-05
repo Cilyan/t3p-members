@@ -15,7 +15,7 @@
                                     @foreach ($editions as $edition)
                                         <tr>
                                             <td>{{ $edition->id }}</td>
-                                            <td>{{ $edition->trail_date->toDateString() }}</td>
+                                            <td>{{ $edition->trail_date->isoFormat('LL') }}</td>
                                             <td class="text-right">
                                                 <a href="{{ route('edition.edit', ['edition' => $edition]) }}" class="btn btn-secondary" role="button">
                                                     <i class="fas fa-edit"></i><span class="d-none d-sm-inline"> {{  __('Edit') }}</span>

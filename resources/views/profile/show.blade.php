@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <dl class="row">
                         <dt class="col-sm-3">{{ __('Birthday') }}</dt>
-                        <dd class="col-sm-9">{{ $profile->birthday->toDateString() }}</dd>
+                        <dd class="col-sm-9">{{ $profile->birthday->isoFormat('LL') }}</dd>
 
                         <dt class="col-sm-3">{{ __('Address') }}</dt>
                         <dd class="col-sm-9">
@@ -56,7 +56,7 @@
                     @foreach ($editions as $edition)
                         <div class="list-group-item">
                             <div class="row">
-                                <div class="col-md-4 pb-2 pb-md-0">{{ $edition->trail_date->toDateString() }}</div>
+                                <div class="col-md-4 pb-2 pb-md-0">{{ $edition->trail_date->isoFormat('LL') }}</div>
                                 <div class="col-md-8">
                                     <a href="{{ route('helper.create', ['profile' => $profile, 'edition' => $edition]) }}" class="btn btn-primary btn-block" role="button" >
                                         <i class="fas fa-plus"></i> {{  __('Be helper') }}
@@ -68,7 +68,7 @@
                     @foreach ($helpers as $helper)
                         <div class="list-group-item">
                             <div class="row">
-                                <div class="col-md-4 pb-2 pb-md-0">{{ $helper->edition->trail_date->toDateString() }}</div>
+                                <div class="col-md-4 pb-2 pb-md-0">{{ $helper->edition->trail_date->isoFormat('LL') }}</div>
                                 <div class="col-md-5 pb-3 pb-md-0">
                                     @if ($helper->active)
                                         <form method="POST" action="{{ route('helper.deactivate', ['helper' => $helper]) }}">
