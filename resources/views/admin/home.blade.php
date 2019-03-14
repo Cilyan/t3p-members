@@ -4,8 +4,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">{{ __("Editions") }}</div>
+            <div class="card shadow">
+                <div class="card-header">
+                    <h6 class="my-1 font-weight-bold">
+                        @lang('Editions')
+                    </h6>
+                </div>
 
                 <div class="card-body">
                     @if ($editions->isNotEmpty())

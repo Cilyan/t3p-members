@@ -4,8 +4,12 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <div class="card">
-                <div class="card-header">{{ __('Remove helper\'s profile') }}</div>
+            <div class="card shadow">
+                <div class="card-header">
+                    <h6 class="my-1 font-weight-bold text-danger">
+                        @lang('Remove helper\'s profile')
+                    </h6>
+                </div>
                 <div class="card-body">
                     <p class="card-text">{{ __('Are you sure you want to remove this helper\'s profile?') }}</p>
                     <p class="card-text">{{ $helper->profile->full_name() }} @lang('for') {{ $helper->edition->id }}</p>

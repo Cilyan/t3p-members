@@ -94,8 +94,9 @@ class HelperController extends Controller
     public function edit(Helper $helper)
     {
         $profile = $helper->profile;
+        $edition = $helper->edition;
         $edit = true;
-        return view('helper.edit', compact('edit', 'profile', 'helper'));
+        return view('helper.edit', compact('edit', 'profile', 'helper', 'edition'));
     }
 
     /**

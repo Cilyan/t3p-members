@@ -4,8 +4,12 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <div class="card">
-                <div class="card-header">{{ __('Remove edition') }}</div>
+            <div class="card shadow">
+                <div class="card-header">
+                    <h6 class="my-1 font-weight-bold text-danger">
+                        @lang('Remove edition')
+                    </h6>
+                </div>
                 <div class="card-body">
                     <p class="card-text">{{ __('Are you sure you want to remove this edition?') }}</p>
                     <p class="card-text">{{ $edition->id}}</p>

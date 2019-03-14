@@ -4,8 +4,12 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <div class="card">
-                <div class="card-header">{{ __('Participant') }}</div>
+            <div class="card shadow">
+                <div class="card-header">
+                    <h6 class="my-1 font-weight-bold">
+                        @lang('Participant')
+                    </h6>
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ $edit ? route('profile.update', ['profile' => $profile]) : route('profile.store') }}">

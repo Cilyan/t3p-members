@@ -4,8 +4,12 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __("Participants") }}</div>
+            <div class="card shadow">
+                <div class="card-header">
+                    <h6 class="my-1 font-weight-bold">
+                        @lang('Participants')
+                    </h6>
+                </div>
 
                 <div class="card-body">
                     @if ($profiles->isNotEmpty())

@@ -4,8 +4,12 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-6 col-xl-7 pb-3 pb-lg-0">
-            <div class="card">
-                <div class="card-header">{{ $profile->first_name . " " . $profile->last_name }}</div>
+            <div class="card shadow">
+                <div class="card-header">
+                    <h6 class="my-1 font-weight-bold">
+                        {{ $profile->first_name . " " . $profile->last_name }}
+                    </h6>
+                </div>
 
                 <div class="card-body">
                     <dl class="row">
@@ -49,8 +53,12 @@
             </div>
         </div>
         <div class="col-lg-6 col-xl-5">
-            <div class="card">
-                <div class="card-header">{{ __('Become Helper') }}</div>
+            <div class="card shadow">
+                <div class="card-header">
+                    <h6 class="my-1 font-weight-bold">
+                        @lang('Become Helper')
+                    </h6>
+                </div>
 
                 <div class="list-group list-group-flush">
                     @foreach ($editions as $edition)
