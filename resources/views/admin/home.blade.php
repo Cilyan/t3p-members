@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    <h1 class="h3 mb-4 text-gray-800">@lang('Administration')</h1>
     <div class="row">
         <div class="col-md-6">
             <div class="card shadow">

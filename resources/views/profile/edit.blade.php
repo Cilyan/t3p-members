@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <div class="card shadow">
+            <div class="card shadow mt-4">
                 <div class="card-header">
                     <h6 class="my-1 font-weight-bold">
                         @lang('Participant')

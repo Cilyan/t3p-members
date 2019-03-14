@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    <h1 class="h3 mb-4 text-gray-800">{{ $profile->first_name . " " . $profile->last_name }}</h1>
     <div class="row justify-content-center">
         <div class="col-lg-6 col-xl-7 pb-3 pb-lg-0">
             <div class="card shadow">

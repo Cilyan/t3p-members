@@ -3,7 +3,7 @@
 @section('bodyclass', 'bg-gradient-primary')
 
 @section('app')
-<main class="py-4">
+<main>
     @include('layouts.alerts')
     <div class="container">
         <div class="card o-hidden border-0 shadow-lg my-5">
