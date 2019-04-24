@@ -1,5 +1,7 @@
 @extends('layouts.structure')
 
+@section('bodyclass', 'bg-image-main')
+
 @section('app')
         <nav class="navbar navbar-expand-md navbar-light mb-4 shadow">
             <div class="container">
