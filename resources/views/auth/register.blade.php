@@ -1,26 +1,40 @@
 @extends('layouts.structure')
 
-@section('bodyclass', 'bg-gradient-primary')
-
 @section('app')
-<main>
+<main class="my-5">
     @include('layouts.alerts')
+    <div class="header-message text-center my-5">
+        <h1>
+            <small>@lang('Participate to the')</small><br/>
+            <strong>Trail des 3 Pics</strong>
+        </h1>
+    </div>
     <div class="container">
-        <div class="card o-hidden border-0 shadow-lg my-5">
-            <div class="card-body p-0">
-                <!-- Nested Row within Card Body -->
-                <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-image" style="background-image: url('{{ asset('img/3.jpg') }}');"></div>
-                    <div class="col-lg-7">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card o-hidden border-0 shadow-lg">
+                    <div class="card-body p-0">
                         <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">@lang('Register')</h1>
+                            @component('layouts.stepper', ['step' => 1])
+                            @endcomponent
+
+                            <div class="text-center mb-5">
+                                <h1 class="h4 text-gray-900 mb-4">@lang('Create an account')</h1>
+                                <p>
+                                    @lang('Welcome to the Trail des 3 Pics! You wish to help us? Please create an account, or ')
+                                    <a href="{{route('login')}}">@lang('log yourself in')</a>
+                                    @lang('if you already have one.')
+                                    @lang('This year, <strong>only helpers</strong> can register through this interface. Please refer to the')
+                                    <a href="https://www.les3pics.fr/">@lang('main site')</a>
+                                    @lang('to subscribe as a trailer.')
+                                </p>
                             </div>
-                            <form method="POST" action="{{ route('register') }}" class="user">
+
+                            <form method="POST" action="{{ route('register') }}">
                                 @csrf
 
                                 <div class="form-group">
-                                    <input id="name" type="text" class="form-control form-control-user{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" placeholder="@lang('Name')" required autofocus>
+                                    <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" placeholder="@lang('Name')" required autofocus>
 
                                     @if ($errors->has('name'))
                                         <span class="invalid-feedback" role="alert">
@@ -29,7 +43,7 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                    <input id="email" type="email" class="form-control form-control-user{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="@lang('E-Mail Address')" required>
+                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="@lang('E-Mail Address')" required>
 
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert">
@@ -39,7 +53,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input id="password" type="password" class="form-control form-control-user{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="@lang('Password')" required>
+                                        <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="@lang('Password')" required>
 
                                         @if ($errors->has('password'))
                                             <span class="invalid-feedback" role="alert">
@@ -48,7 +62,7 @@
                                         @endif
                                     </div>
                                     <div class="col-sm-6">
-                                        <input id="password-confirm" type="password" class="form-control form-control-user" name="password_confirmation" placeholder="@lang('Confirm Password')" required>
+                                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="@lang('Confirm Password')" required>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-user btn-block">
@@ -58,16 +72,18 @@
                                 @include('auth.shared.social_providers')
                             </form>
                             <hr>
+                            <div class="text-center">
+                                <a href="{{ route('login') }}">
+                                    @lang('Already have an account? Login!')
+                                </a>
+                            </div>
                             @if (Route::has('password.request'))
                                 <div class="text-center">
-                                    <a class="small" href="{{ route('password.request') }}">
+                                    <a href="{{ route('password.request') }}">
                                         @lang('Forgot Your Password?')
                                     </a>
                                 </div>
                             @endif
-                            <div class="text-center">
-                                <a class="small" href="{{ route('login') }}">@lang('Already have an account? Login!')</a>
-                            </div>
                         </div>
                     </div>
                 </div>

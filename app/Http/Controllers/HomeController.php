@@ -24,6 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (auth()->user()->profiles()->count() == 0) {
+            return redirect()->route('profile.create');
+        }
         return view('home', [
             "user" => auth()->user(),
             "profiles" => auth()->user()->profiles

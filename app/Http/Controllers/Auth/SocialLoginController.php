@@ -56,7 +56,7 @@ class SocialLoginController extends Controller
         }
 
         if (empty($request->input("code"))) {
-            return redirect()->route("login")
+            return redirect()->route("register")
                 ->with('status-error', __("auth.social_failed"));
         }
 

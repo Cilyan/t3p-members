@@ -20,10 +20,10 @@ class HelperController extends Controller
         $this->middleware('auth');
         $this->middleware('verified');
         $this->middleware('can:update,helper')->except(
-            ['create', 'store']
+            ['create', 'store', 'thanks']
         );
         $this->middleware('can:update,profile')->only(
-            ['create', 'store']
+            ['create', 'store', 'thanks']
         );
     }
 
@@ -51,7 +51,7 @@ class HelperController extends Controller
             $helper->legal_age = true;
         }
 
-        return view('helper.edit', compact('edit', 'helper', 'profile', 'edition'));
+        return view('helper.new', compact('edit', 'helper', 'profile', 'edition'));
     }
 
     /**
@@ -68,9 +68,7 @@ class HelperController extends Controller
         $helper->edition()->associate($edition);
         $helper->save();
         return redirect()->intended(
-            route('profile.show', ['profile' => $profile])
-        )->with(
-            'status', __('Helper profile created.')
+            route('helper.thanks', ['profile' => $helper->profile, 'edition' => $helper->edition])
         );
     }
 
@@ -172,5 +170,16 @@ class HelperController extends Controller
         )->with(
             'status', __('Helper profile removed.')
         );
+    }
+
+    /**
+     * Show a thanks page.
+     *
+     * @param  \App\Helper  $helper
+     * @return \Illuminate\Http\Response
+     */
+    public function thanks(Profile $profile, Edition $edition)
+    {
+        return view('helper.thanks', compact('profile', 'edition'));
     }
 }

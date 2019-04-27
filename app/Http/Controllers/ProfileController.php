@@ -32,7 +32,8 @@ class ProfileController extends Controller
     {
         $profile = new Profile();
         $edit = false;
-        return view('profile.edit', compact('edit', 'profile'));
+        $first_profile = auth()->user()->profiles()->count() == 0 ? true : false;
+        return view('profile.new', compact('edit', 'profile', 'first_profile'));
     }
 
     /**
@@ -55,10 +56,7 @@ class ProfileController extends Controller
                     'profile' => $profile,
                     'edition' => $active_edition
                 ]
-            )->with([
-                'status' => __('Participant created.'),
-                'from-profile-creation' => true,
-            ]);
+            );
         }
 
         return redirect()->route('profile.show', ['profile' => $profile])->with(
@@ -93,7 +91,8 @@ class ProfileController extends Controller
     public function edit(Profile $profile)
     {
         $edit = true;
-        return view('profile.edit', compact('edit', 'profile'));
+        $first_profile = false;
+        return view('profile.edit', compact('edit', 'profile', 'first_profile'));
     }
 
     /**

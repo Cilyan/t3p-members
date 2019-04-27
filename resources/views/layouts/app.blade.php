@@ -3,7 +3,7 @@
 @section('bodyclass', 'bg-image-main')
 
 @section('app')
-        <nav class="navbar navbar-expand-md navbar-light mb-4 shadow">
+        <nav class="navbar navbar-expand-md navbar-dark mb-4">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -62,7 +62,7 @@
             </div>
         </nav>
 
-        <main>
+        <main class="my-5">
             @include('layouts.alerts')
             @yield('content')
         </main>

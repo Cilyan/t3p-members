@@ -28,6 +28,7 @@ Route::get('profile/{profile}/delete', 'ProfileController@delete')->name('profil
 Route::resource('helper', 'HelperController')->except(['index', 'show', 'create', 'store']);
 Route::get('profile/{profile}/for/{edition}/helper', 'HelperController@create')->name('helper.create');
 Route::post('profile/{profile}/for/{edition}/helper', 'HelperController@store')->name('helper.store');
+Route::get('profile/{profile}/for/{edition}/helper/thanks', 'HelperController@thanks')->name('helper.thanks');
 Route::get('helper/{helper}/delete', 'HelperController@delete')->name('helper.delete');
 Route::post('helper/{helper}/activate', 'HelperController@activate')->name('helper.activate');
 Route::post('helper/{helper}/deactivate', 'HelperController@deactivate')->name('helper.deactivate');

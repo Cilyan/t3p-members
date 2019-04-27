@@ -26,7 +26,7 @@ class VerificationController extends Controller
      * @return string
      */
     protected function redirectTo() {
-        return route('home');
+        return route('profile.create');
     }
 
     /**
