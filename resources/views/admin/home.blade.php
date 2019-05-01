@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1 class="h3 mb-4 text-gray-800">@lang('Administration')</h1>
+    <h1 class="h3 mb-4 text-white">@lang('Administration')</h1>
     <div class="row">
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card border-left-primary shadow h-100 py-2">

@@ -67,8 +67,12 @@ class HelperController extends Controller
         $helper->profile()->associate($profile);
         $helper->edition()->associate($edition);
         $helper->save();
-        return redirect()->intended(
-            route('helper.thanks', ['profile' => $helper->profile, 'edition' => $helper->edition])
+        return redirect()->route(
+            'helper.thanks',
+            [
+                'profile' => $helper->profile,
+                'edition' => $helper->edition
+            ]
         );
     }
 

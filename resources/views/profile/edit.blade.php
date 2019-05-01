@@ -1,21 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.wizard')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <div class="card shadow mt-4">
-                <div class="card-header">
-                    <h6 class="my-1 font-weight-bold">
-                        @lang('Participant')
-                    </h6>
-                </div>
-
-                <div class="card-body">
-                    @include('profile._form')
-                </div>
-            </div>
-        </div>
+@section('wizard_content')
+    <div class="text-center mb-5">
+        <h1 class="h4 text-gray-900 mb-4">@lang('Edit your participant profile')</h1>
+        <p>
+            @lang('Tell us about you. This profile is for one participant. You will be able to add more participants later if you need so.')
+        </p>
     </div>
-</div>
+
+    @include('profile._form')
 @endsection

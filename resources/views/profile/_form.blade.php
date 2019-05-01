@@ -141,7 +141,7 @@
         @endif
     </div>
 
-    <div class="form-group pb-2">
+    <div class="form-group">
         <label for="phone">{{ __('Phone') }}</label>
         <input id="phone" type="tel" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone', $profile->phone ?? null) }}">
 
@@ -152,9 +152,7 @@
         @endif
     </div>
 
-    <hr class="pb-2"/>
-
-    <div class="form-group row flex-row-reverse align-items-center justify-content-start">
+    <div class="form-group row flex-row-reverse align-items-center justify-content-start pt-3">
         @if($edit)
             <div class="col-sm-8 pb-3 pb-sm-0">
                 <button type="submit" class="btn btn-primary btn-block">

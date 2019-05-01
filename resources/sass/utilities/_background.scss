@@ -6,6 +6,12 @@
   background-size: cover;
 }
 
+.bg-gradient-side-primary {
+  background-color: $primary;
+  background-image: linear-gradient(270deg, $primary 10%, darken($primary, 15%) 100%);
+  background-size: cover;
+}
+
 .bg-gradient-success {
   background-color: $success;
   background-image: linear-gradient(180deg, $success 10%, darken($success, 15%) 100%);
@@ -15,6 +21,12 @@
 .bg-gradient-info {
   background-color: $info;
   background-image: linear-gradient(180deg, $info 10%, darken($info, 15%) 100%);
+  background-size: cover;
+}
+
+.bg-gradient-side-info {
+  background-color: $info;
+  background-image: linear-gradient(270deg, $info 10%, darken($info, 15%) 100%);
   background-size: cover;
 }
 

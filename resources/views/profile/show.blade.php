@@ -2,13 +2,13 @@
 
 @section('content')
 <div class="container">
-    <h1 class="h3 mb-4 text-gray-800">{{ $profile->first_name . " " . $profile->last_name }}</h1>
+    <h1 class="h3 mb-4 text-white">{{ $profile->full_name() }}</h1>
     <div class="row justify-content-center">
         <div class="col-lg-6 col-xl-7 pb-3 pb-lg-0">
             <div class="card shadow">
                 <div class="card-header">
                     <h6 class="my-1 font-weight-bold">
-                        {{ $profile->first_name . " " . $profile->last_name }}
+                        {{ $profile->full_name() }}
                     </h6>
                 </div>
 
