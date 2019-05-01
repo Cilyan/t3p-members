@@ -37,3 +37,4 @@ Route::resource('edition', 'EditionController')->except(['index', 'show']);
 Route::get('edition/{edition}/delete', 'EditionController@delete')->name('edition.delete');
 
 Route::get('/admin', 'AdminController@index')->name('admin.home');
+Route::get('/admin/helpers/{edition}/export', 'AdminController@export')->name('admin.export');

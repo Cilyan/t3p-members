@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Edition;
 use App\Profile;
+use App\Exports\HelpersExport;
 
 class AdminController extends Controller
 {
@@ -41,6 +42,12 @@ class AdminController extends Controller
             "users_count" => User::count(),
             "profiles_count" => Profile::count(),
             "helpers_count" => $helpers_count,
+            "current_edition" => $edition,
         ]);
+    }
+
+    public function export(Edition $edition)
+    {
+        return new HelpersExport($edition);
     }
 }
