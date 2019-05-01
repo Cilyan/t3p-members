@@ -2,7 +2,10 @@
 
 @section('content')
 <div class="container">
-    <h1 class="h3 mb-4 text-white">@lang('Administration')</h1>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-4 text-white">@lang('Administration')</h1>
+        <a href="{{ route('admin.export', ['edition' => $current_edition]) }}" class="btn btn-primary"><i class="fas fa-download"></i> @lang("Export Helpers")</a>
+    </div>
     <div class="row">
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card border-left-primary shadow h-100 py-2">
