@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use DateTime;
+use App\Rules\Country;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProfileRequest extends FormRequest
@@ -54,13 +55,13 @@ class ProfileRequest extends FormRequest
             'first_name' => 'required',
             'last_name' => 'required',
             'birthday' => 'required|date_format:Y-m-d|before:today',
-            'country' => 'required',
+            'country' => ['required', new Country],
             'administrative_area' => 'nullable|required_without_all:locality,postal_code,thoroughfare,premise',
             'locality' => 'nullable|required_without_all:administrative_area,postal_code,thoroughfare,premise',
             'postal_code' => 'nullable|required_without_all:administrative_area,locality,thoroughfare,premise',
             'thoroughfare' => 'nullable|required_without_all:administrative_area,locality,postal_code,premise',
             'premise' => 'nullable|required_without_all:administrative_area,locality,postal_code,thoroughfare',
-            'phone' => 'nullable',
+            'phone' => 'nullable|phone:AUTO,country',
             'tshirt_size' => 'required|in:xs,s,m,l,xl,xxl',
             'tshirt_gender' => 'required|in:M,F',
         ];

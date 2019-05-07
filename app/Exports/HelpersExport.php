@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use App\Edition;
 use App\Helper;
+use Propaganistas\LaravelPhone\PhoneNumber;
 use Illuminate\Contracts\Support\Responsable;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\Exportable;
@@ -39,12 +40,29 @@ class HelpersExport implements FromQuery, Responsable, WithMapping, WithHeadings
     */
     public function map($helper): array
     {
+        if ($helper->profile->phone) {
+            try {
+                $phone = PhoneNumber::make($helper->profile->phone, $helper->profile->country)->formatForMobileDialingInCountry('FR');
+
+            }
+            catch (NumberParseException $e) {
+                try {
+                    $phone = PhoneNumber::make($helper->profile->phone)->formatForMobileDialingInCountry('FR');
+                }
+                catch (NumberParseException $e) {
+                    $phone = "Invalid";
+                }
+            }
+        }
+        else {
+            $phone = null;
+        }
         return [
             $helper->profile->id,
             $helper->profile->first_name,
             $helper->profile->last_name,
             $helper->profile->user->email,
-            $helper->profile->phone,
+            $phone,
             $helper->phone_provider,
             $helper->first_responder ? __('Yes') : __('No'),
             Date::dateTimeToExcel($helper->profile->birthday),

@@ -6,6 +6,7 @@ use App\Profile;
 use App\Edition;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProfileRequest;
+use Propaganistas\LaravelIntl\Facades\Country;
 
 class ProfileController extends Controller
 {
@@ -34,7 +35,8 @@ class ProfileController extends Controller
         $edit = false;
         $first_profile = auth()->user()->profiles()->count() == 0 ? true : false;
         $in_wizard = true;
-        return view('profile.edit', compact('edit', 'profile', 'first_profile', 'in_wizard'));
+        $countries = Country::all();
+        return view('profile.edit', compact('edit', 'profile', 'first_profile', 'in_wizard', 'countries'));
     }
 
     /**
@@ -94,7 +96,8 @@ class ProfileController extends Controller
         $edit = true;
         $first_profile = false;
         $in_wizard = $request->input('wizard', false);
-        return view('profile.edit', compact('edit', 'profile', 'first_profile', 'in_wizard'));
+        $countries = Country::all();
+        return view('profile.edit', compact('edit', 'profile', 'first_profile', 'in_wizard', 'countries'));
     }
 
     /**

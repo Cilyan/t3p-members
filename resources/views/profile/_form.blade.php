@@ -120,7 +120,11 @@
 
         <div class="form-group col-12 col-md-5">
             <label for="country">{{ __('Country') }}<span class="text-danger">*</span></label>
-            <input id="country" type="text" class="form-control{{ $errors->has('country') ? ' is-invalid' : '' }}" name="country" value="{{ old('country', $profile->country ?? null) }}" required>
+            <select id="country" class="form-control{{ $errors->has('country') ? ' is-invalid' : '' }}" name="country" required>
+                @foreach ($countries as $code => $name)
+                    <option value="{{$code}}" {{ old('country', $profile->country ?? null) == $code ? 'selected' : '' }}>{{ $name }}</option>
+                @endforeach
+            </select>
 
             @if ($errors->has('country'))
                 <span class="invalid-feedback" role="alert">
