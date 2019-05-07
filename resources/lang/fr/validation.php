@@ -127,8 +127,24 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'birthday' => [
+            'before' => "La date d'anniversaire doit être antérieure à aujourd'hui",
+            'date_format' => "La date d'anniversaire doit respecter le format AAAA-MM-JJ ou JJ/MM/AAAA",
+        ],
+        'administrative_area' => [
+            'required_without_all' => "Nous avons besoin d'une adresse",
+        ],
+        'locality' => [
+            'required_without_all' => "Nous avons besoin d'une adresse",
+        ],
+        'postal_code' => [
+            'required_without_all' => "Nous avons besoin d'une adresse",
+        ],
+        'thoroughfare' => [
+            'required_without_all' => "Nous avons besoin d'une adresse",
+        ],
+        'premise' => [
+            'required_without_all' => "Nous avons besoin d'une adresse",
         ],
     ],
 

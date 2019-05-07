@@ -31,7 +31,7 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="birthday">{{ __('Birthday') }}<span class="text-danger">*</span></label>
-            <input id="birthday" type="date" class="form-control{{ $errors->has('birthday') ? ' is-invalid' : '' }}" name="birthday" value="{{ old('birthday', $profile->birthday ? $profile->birthday->toDateString() : null) }}" required>
+            <input id="birthday" type="date" class="form-control{{ $errors->has('birthday') ? ' is-invalid' : '' }}" name="birthday" value="{{ old('birthday', $profile->birthday ? $profile->birthday->toDateString() : null) }}" required placeholder="@lang('YYYY-MM-DD')">
 
             @if ($errors->has('birthday'))
                 <span class="invalid-feedback" role="alert">

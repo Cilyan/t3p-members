@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use DateTime;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProfileRequest extends FormRequest
@@ -17,6 +18,32 @@ class ProfileRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        /* Accept several formats for the date */
+        if ($this->has('birthday')) {
+            $birthday = DateTime::createFromFormat("!Y-m-d", $this->birthday);
+            if (!$birthday) {
+                $birthday = DateTime::createFromFormat("!d/m/Y", $this->birthday);
+            }
+            if (!$birthday) {
+                $birthday = DateTime::createFromFormat("!d/m/y", $this->birthday);
+            }
+            if ($birthday) {
+                $this->merge(
+                    [
+                        'birthday' => $birthday->format("Y-m-d"),
+                    ]
+                );
+            }
+        }
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -26,7 +53,7 @@ class ProfileRequest extends FormRequest
         return [
             'first_name' => 'required',
             'last_name' => 'required',
-            'birthday' => 'required|date',
+            'birthday' => 'required|date_format:Y-m-d|before:today',
             'country' => 'required',
             'administrative_area' => 'nullable|required_without_all:locality,postal_code,thoroughfare,premise',
             'locality' => 'nullable|required_without_all:administrative_area,postal_code,thoroughfare,premise',
@@ -46,12 +73,6 @@ class ProfileRequest extends FormRequest
      */
     public function messages()
     {
-        return [
-            'administrative_area.required_without_all' => 'Address is required',
-            'locality.required_without_all' => 'Address is required',
-            'postal_code.required_without_all' => 'Address is required',
-            'thoroughfare.required_without_all' => 'Address is required',
-            'premise.required_without_all' => 'Address is required',
-        ];
+        return [];
     }
 }

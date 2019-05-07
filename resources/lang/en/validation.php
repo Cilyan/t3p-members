@@ -128,8 +128,23 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'birthday' => [
+            'date_format' => 'Birthday shall follow format YYYY-MM-DD or DD/MM/YYYY',
+        ],
+        'administrative_area' => [
+            'required_without_all' => "We need to know your address",
+        ],
+        'locality' => [
+            'required_without_all' => "We need to know your address",
+        ],
+        'postal_code' => [
+            'required_without_all' => "We need to know your address",
+        ],
+        'thoroughfare' => [
+            'required_without_all' => "We need to know your address",
+        ],
+        'premise' => [
+            'required_without_all' => "We need to know your address",
         ],
     ],
 
