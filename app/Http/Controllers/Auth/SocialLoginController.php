@@ -74,7 +74,12 @@ class SocialLoginController extends Controller
         if (empty($socialLogin)) {
             // try to find user by email, or create one
             if (!$socialUserObject->getEmail()) {
-                abort(505, "Email not provided");
+                if ($provider == 'facebook') {
+                    return Socialite::driver('facebook')->with(['auth_type' => 'rerequest'])->redirect();
+                }
+                else {
+                    abort(505, "Email not provided");
+                }
             }
 
             $user =
