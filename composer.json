@@ -15,7 +15,8 @@
         "laravel/tinker": "^1.0",
         "maatwebsite/excel": "^3.1",
         "propaganistas/laravel-intl": "^3.0",
-        "propaganistas/laravel-phone": "^4.2"
+        "propaganistas/laravel-phone": "^4.2",
+        "socialiteproviders/microsoft": "^1.1"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

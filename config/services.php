@@ -52,4 +52,10 @@ return [
         'redirect'      => env('APP_URL') . '/auth/login/facebook/callback'
     ],
 
+    'microsoft' => [
+        'client_id'     => env('MICROSOFT_CLIENT_ID'),
+        'client_secret' => env('MICROSOFT_CLIENT_SECRET'),
+        'redirect'      => env('APP_URL') . '/auth/login/microsoft/callback'
+    ],
+
 ];
