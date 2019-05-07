@@ -1,4 +1,4 @@
-<form method="POST" action="{{ $edit ? route('profile.update', ['profile' => $profile]) : route('profile.store') }}" class="user">
+<form method="POST" action="{{ $edit ? route('profile.update', ['profile' => $profile, 'wizard' => $in_wizard]) : route('profile.store') }}" class="user">
     @csrf
     @if ($edit)
         @method('PATCH')
@@ -153,7 +153,29 @@
     </div>
 
     <div class="form-group row flex-row-reverse align-items-center justify-content-start pt-3">
-        @if($edit)
+        @if($in_wizard)
+            <div class="col-sm-8 pb-3 pb-sm-0">
+                <button type="submit" class="btn btn-primary btn-block">
+                    <i class="fas fa-angle-right"></i>
+                    {{  $edit ? __('Edit') : __('Create') }}
+                </button>
+            </div>
+            @if (!$first_profile)
+                @if ($edit)
+                    <div class="col-sm-4">
+                        <a href="{{ route("profile.delete", ['profile' => $profile])}}" class="btn btn-danger btn-block" role="button">
+                            <i class="fas fa-trash-alt"></i> {{  __('Remove') }}
+                        </a>
+                    </div>
+                @else
+                    <div class="col-sm-4">
+                        <a href="{{ route('home') }}" class="btn btn-light btn-block" role="button">
+                            <i class="fas fa-times"></i> {{  __('Cancel') }}
+                        </a>
+                    </div>
+                @endif
+            @endif
+        @else
             <div class="col-sm-8 pb-3 pb-sm-0">
                 <button type="submit" class="btn btn-primary btn-block">
                     <i class="fas fa-edit"></i> {{  __('Edit') }}
@@ -164,20 +186,6 @@
                     <i class="fas fa-times"></i> {{  __('Cancel') }}
                 </a>
             </div>
-        @else
-            <div class="col-sm-8 pb-3 pb-sm-0">
-                <button type="submit" class="btn btn-primary btn-block">
-                    <i class="fas fa-angle-right"></i>
-                    {{  __('Create') }}
-                </button>
-            </div>
-            @if (!$first_profile)
-                <div class="col-sm-4">
-                    <a href="{{ route('home') }}" class="btn btn-light btn-block" role="button">
-                        <i class="fas fa-times"></i> {{  __('Cancel') }}
-                    </a>
-                </div>
-            @endif
         @endif
     </div>
 </form>

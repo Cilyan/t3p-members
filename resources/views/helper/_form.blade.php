@@ -1,4 +1,4 @@
-<form method="POST" action="{{ $edit ? route('helper.update', ['helper' => $helper]) : route('helper.store', ['profile' => $profile, 'edition' => $edition]) }}">
+<form method="POST" action="{{ $edit ? route('helper.update', ['helper' => $helper]) : route('helper.store', ['profile' => $profile, 'edition' => $edition, 'wizard' => $in_wizard]) }}">
     @csrf
     @if ($edit)
         @method('PATCH')
@@ -178,18 +178,13 @@
 
     <div class="form-group row flex-row-reverse align-items-center justify-content-start">
         @if($edit)
-            <div class="col-md-6 pb-3 pb-md-0">
+            <div class="col-sm-8 pb-3 pb-sm-0">
                 <button type="submit" class="btn btn-primary btn-block">
                     <i class="fas fa-edit"></i> {{  __('Edit') }}
                 </button>
             </div>
-            <div class="col-6 col-md-3">
-                <a href="{{ route("helper.delete", ['helper' => $helper])}}" class="btn btn-danger btn-block" role="button">
-                    <i class="fas fa-trash-alt"></i> {{  __('Remove') }}
-                </a>
-            </div>
-            <div class="col-6 col-md-3">
-                <a href="{{ route('profile.show', ['profile' => $profile]) }}" class="btn btn-light btn-block" role="button">
+            <div class="col-sm-4">
+                <a href="{{ route("profile.show", ["profile" => $profile]) }}" class="btn btn-light btn-block" role="button">
                     <i class="fas fa-times"></i> {{  __('Cancel') }}
                 </a>
             </div>
@@ -199,11 +194,19 @@
                     <i class="fas fa-check"></i> {{  __('Confirm') }}
                 </button>
             </div>
-            <div class="col-sm-4">
-                <a href="{{ route('profile.show', ['profile' => $profile]) }}" class="btn btn-light btn-block" role="button">
-                    <i class="fas fa-times"></i> {{  __('Cancel') }}
-                </a>
-            </div>
+            @if ($in_wizard)
+                <div class="col-sm-4">
+                    <a href="{{ route('profile.edit', ['profile' => $profile, 'wizard' => true]) }}" class="btn btn-light btn-block" role="button">
+                        <i class="fas fa-angle-left"></i> {{  __('Back') }}
+                    </a>
+                </div>
+            @else
+                <div class="col-sm-4">
+                    <a href="{{ route("profile.show", ["profile" => $profile]) }}" class="btn btn-light btn-block" role="button">
+                        <i class="fas fa-times"></i> {{  __('Cancel') }}
+                    </a>
+                </div>
+            @endif
         @endif
     </div>
 </form>

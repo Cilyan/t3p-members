@@ -33,7 +33,8 @@ class ProfileController extends Controller
         $profile = new Profile();
         $edit = false;
         $first_profile = auth()->user()->profiles()->count() == 0 ? true : false;
-        return view('profile.new', compact('edit', 'profile', 'first_profile'));
+        $in_wizard = true;
+        return view('profile.edit', compact('edit', 'profile', 'first_profile', 'in_wizard'));
     }
 
     /**
@@ -88,11 +89,12 @@ class ProfileController extends Controller
      * @param  \App\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function edit(Profile $profile)
+    public function edit(Profile $profile, Request $request)
     {
         $edit = true;
         $first_profile = false;
-        return view('profile.edit', compact('edit', 'profile', 'first_profile'));
+        $in_wizard = $request->input('wizard', false);
+        return view('profile.edit', compact('edit', 'profile', 'first_profile', 'in_wizard'));
     }
 
     /**
@@ -107,6 +109,20 @@ class ProfileController extends Controller
         $validated = $request->validated();
         $profile->update($validated);
         $profile->save();
+
+        // If subscriptions for helpers are open, send user to helper profile
+        // creation. Else, send them to profile display.
+        $active_edition = Edition::active_for_helpers()->first();
+        $wizard = $request->input('wizard', false);
+        if ($active_edition && $wizard) {
+            return redirect()->route(
+                'helper.create', [
+                    'profile' => $profile,
+                    'edition' => $active_edition
+                ]
+            );
+        }
+
         return redirect()->route('profile.show', ['profile' => $profile])->with(
             'status', __('Participant updated.')
         );

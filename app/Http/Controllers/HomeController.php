@@ -29,7 +29,7 @@ class HomeController extends Controller
         }
         return view('home', [
             "user" => auth()->user(),
-            "profiles" => auth()->user()->profiles
+            "profiles" => auth()->user()->profiles()->with("helpers_active")->get()
         ]);
     }
 

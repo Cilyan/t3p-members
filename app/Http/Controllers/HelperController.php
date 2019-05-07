@@ -42,7 +42,7 @@ class HelperController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Profile $profile, Edition $edition)
+    public function create(Profile $profile, Edition $edition, Request $request)
     {
         $helper = new Helper();
         $edit = false;
@@ -51,7 +51,9 @@ class HelperController extends Controller
             $helper->legal_age = true;
         }
 
-        return view('helper.new', compact('edit', 'helper', 'profile', 'edition'));
+        $in_wizard = $request->input('wizard', true);
+
+        return view('helper.edit', compact('edit', 'helper', 'profile', 'edition', 'in_wizard'));
     }
 
     /**
@@ -67,12 +69,19 @@ class HelperController extends Controller
         $helper->profile()->associate($profile);
         $helper->edition()->associate($edition);
         $helper->save();
+        $in_wizard = $request->input('wizard', true);
+        if ($in_wizard) {
+            $opts = [];
+        }
+        else {
+            $opts = ['wizard' => false];
+        }
         return redirect()->route(
             'helper.thanks',
             [
                 'profile' => $helper->profile,
                 'edition' => $helper->edition
-            ]
+            ] + $opts
         );
     }
 
@@ -98,7 +107,8 @@ class HelperController extends Controller
         $profile = $helper->profile;
         $edition = $helper->edition;
         $edit = true;
-        return view('helper.edit', compact('edit', 'profile', 'helper', 'edition'));
+        $in_wizard = false;
+        return view('helper.edit', compact('edit', 'profile', 'helper', 'edition', 'in_wizard'));
     }
 
     /**
@@ -182,8 +192,9 @@ class HelperController extends Controller
      * @param  \App\Helper  $helper
      * @return \Illuminate\Http\Response
      */
-    public function thanks(Profile $profile, Edition $edition)
+    public function thanks(Profile $profile, Edition $edition, Request $request)
     {
-        return view('helper.thanks', compact('profile', 'edition'));
+        $in_wizard = $request->input('wizard', true);
+        return view('helper.thanks', compact('profile', 'edition', 'in_wizard'));
     }
 }
