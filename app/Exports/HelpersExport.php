@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use App\Edition;
 use App\Helper;
+use App\Data\HelperData;
 use Propaganistas\LaravelPhone\PhoneNumber;
 use Illuminate\Contracts\Support\Responsable;
 use Maatwebsite\Excel\Concerns\FromQuery;
@@ -42,12 +43,17 @@ class HelpersExport implements FromQuery, Responsable, WithMapping, WithHeadings
     {
         if ($helper->profile->phone) {
             try {
-                $phone = PhoneNumber::make($helper->profile->phone, $helper->profile->country)->formatForMobileDialingInCountry('FR');
+                $phone = PhoneNumber::make(
+                    $helper->profile->phone,
+                    $helper->profile->country
+                )->formatForMobileDialingInCountry('FR');
 
             }
             catch (NumberParseException $e) {
                 try {
-                    $phone = PhoneNumber::make($helper->profile->phone)->formatForMobileDialingInCountry('FR');
+                    $phone = PhoneNumber::make(
+                        $helper->profile->phone
+                    )->formatForMobileDialingInCountry('FR');
                 }
                 catch (NumberParseException $e) {
                     $phone = "Invalid";
@@ -75,8 +81,9 @@ class HelpersExport implements FromQuery, Responsable, WithMapping, WithHeadings
             $helper->day_before_meal ? __('Yes') : __('No'),
             $helper->after_event_meal ? __('Yes') : __('No'),
             $helper->housing,
-            $helper->prefered_activity,
-            $helper->prefered_sector,
+            HelperData::getPreferedActivity($helper->prefered_activity),
+            HelperData::getPreferedSector($helper->prefered_sector),
+            null,
             null,
             null,
             $helper->comment,
