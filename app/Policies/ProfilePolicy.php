@@ -21,4 +21,18 @@ class ProfilePolicy
     {
         return $user->id === $profile->user_id;
     }
+
+    /**
+     * Allow administrators to update any helper profiles
+     *
+     * @param \App\User $user
+     * @param $ability
+     * @return mixed
+     */
+    public function before(User $user, $ability)
+    {
+        if ($user->is_admin == true) {
+            return true;
+        }
+    }
 }

@@ -50,4 +50,16 @@ class AdminController extends Controller
     {
         return new HelpersExport($edition);
     }
+
+    /**
+     * Show the list of all profiles.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function profiles()
+    {
+        return view('admin.profiles', [
+            "profiles" => Profile::orderBy('last_name')->orderBy('first_name')->paginate(20)
+        ]);
+    }
 }

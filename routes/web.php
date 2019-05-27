@@ -38,3 +38,4 @@ Route::get('edition/{edition}/delete', 'EditionController@delete')->name('editio
 
 Route::get('/admin', 'AdminController@index')->name('admin.home');
 Route::get('/admin/helpers/{edition}/export', 'AdminController@export')->name('admin.export');
+Route::get('/admin/profiles', 'AdminController@profiles')->name('admin.profiles');
