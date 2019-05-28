@@ -30,7 +30,7 @@ class HelperRequest extends FormRequest
             'driving_license_location' => 'nullable|required_with:driving_license',
             'prefered_activity' => 'required|in:any,welcoming,way_directions,beaconing,organisation,refreshment_booth,opener_closer',
             'prefered_sector' => 'required|in:any,augirein,arbas',
-            'comment' => 'nullable|max:200',
+            'comment' => 'nullable|max:300',
             'housing' => 'nullable|max:50',
             'sleep_day_before' => 'required|boolean',
             'day_before_meal' => 'required|boolean',

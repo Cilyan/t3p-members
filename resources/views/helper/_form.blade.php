@@ -165,7 +165,7 @@
 
     <div class="form-group pb-2">
         <label for="comment">{{ __('Other comments') }}</label>
-        <textarea class="form-control" id="comment" rows="4"  class="form-control{{ $errors->has('comment') ? ' is-invalid' : '' }}" name="comment">{{ old('comment', $helper->comment ?? null) }}</textarea>
+        <textarea id="comment" rows="4" class="form-control{{ $errors->has('comment') ? ' is-invalid' : '' }}" name="comment">{{ old('comment', $helper->comment ?? null) }}</textarea>
 
         @if ($errors->has('comment'))
             <span class="invalid-feedback" role="alert">
