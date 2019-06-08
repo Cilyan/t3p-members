@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 <div class="container">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-4 text-white">@lang('Administration')</h1>
+        <h1 class="h3 mb-4 text-gray-600">@lang('Administration')</h1>
         <a href="{{ route('admin.export', ['edition' => $current_edition]) }}" class="btn btn-primary"><i class="fas fa-download"></i> @lang("Export Helpers")</a>
     </div>
     <div class="row">
@@ -23,7 +23,6 @@
           </div>
         </div>
         <div class="col-lg-4 col-md-6 mb-4">
-          <a href="{{ route('admin.profiles') }}">
             <div class="card border-left-success shadow h-100 py-2">
               <div class="card-body">
                 <div class="row no-gutters align-items-center">
@@ -37,7 +36,6 @@
                 </div>
               </div>
             </div>
-          </a>
         </div>
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card border-left-info shadow h-100 py-2">

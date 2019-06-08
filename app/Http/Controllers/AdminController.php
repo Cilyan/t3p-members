@@ -62,4 +62,16 @@ class AdminController extends Controller
             "profiles" => Profile::orderBy('last_name')->orderBy('first_name')->paginate(20)
         ]);
     }
+
+    /**
+     * Show the list of all profiles.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function accounts()
+    {
+        return view('admin.accounts', [
+            "accounts" => User::orderBy('name')->paginate(20)
+        ]);
+    }
 }

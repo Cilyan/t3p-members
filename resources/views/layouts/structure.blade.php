@@ -34,9 +34,7 @@
     </style>
 
 </head>
-<body class="bg-image-main">
-    <div id="app">
-        @yield('app')
-    </div>
-</body>
+
+@yield('app')
+
 </html>
