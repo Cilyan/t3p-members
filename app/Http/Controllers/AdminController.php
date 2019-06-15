@@ -7,6 +7,7 @@ use App\User;
 use App\Edition;
 use App\Profile;
 use App\Exports\HelpersExport;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -32,17 +33,37 @@ class AdminController extends Controller
         $edition = Edition::active_for_helpers()->first();
         if ($edition) {
             $helpers_count = $edition->helpers()->count();
+
+            $stats = $edition->helpers_stats();
+            $cumsum = 0;
+            foreach($stats as $item) {
+                $cumsum += $item->aggregate;
+                $item->y = $cumsum;
+            }
+            $data = $stats->map(
+                function($item, $key) {
+                    $obj = (object) [];
+                    $obj->x = $item->date;
+                    $obj->y = $item->y;
+                    return $obj;
+                }
+            );
+            $today = (object) [];
+            $today->x = Carbon::now()->format('Y-m-d');
+            $today->y = $data->last()->y;
+            $data->push($today);
         }
         else {
             $helpers_count = __("No active editions");
+            $data = null;
         }
         return view('admin.home', [
             "user" => auth()->user(),
-            "editions" => Edition::all(),
             "users_count" => User::count(),
             "profiles_count" => Profile::count(),
             "helpers_count" => $helpers_count,
             "current_edition" => $edition,
+            "data" => $data
         ]);
     }
 

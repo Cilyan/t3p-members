@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 class Edition extends Model
@@ -41,5 +42,18 @@ class Edition extends Model
         )->whereDate(
             'trail_date', '>=', Carbon::today()->toDateString()
         );
+    }
+
+    public function helpers_stats()
+    {
+        return $this->helpers()
+            ->groupBy('date')
+            ->orderBy('date', 'ASC')
+            ->get(
+                array(
+                    DB::raw("DATE(`created_at`) as 'date'"),
+                    DB::raw("COUNT(*) as 'aggregate'")
+                )
+            );
     }
 }

@@ -1,5 +1,9 @@
 @extends('layouts.structure')
 
+@push('scripts')
+    <script src="{{ asset('js/admin.js') }}" defer></script>
+@endpush
+
 @section('app')
 <body>
     <!-- Page Wrapper -->
@@ -22,5 +26,6 @@
             </div>
         </div>
     </div>
+    @stack('admin-scripts')
 </body>
 @endsection

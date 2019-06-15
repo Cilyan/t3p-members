@@ -1,5 +1,73 @@
 @extends('layouts.admin')
 
+@push('admin-scripts')
+    @if ($data != null)
+        <script  type="text/javascript">
+        var charts_config = [
+            {
+                id: "#helpersGraphCanvas",
+                config: {
+                    type: 'line',
+                    data: {
+                        datasets: [{
+                            data: @json($data),
+                            backgroundColor: "rgba(78, 115, 223, 0.05)",
+                            borderColor: "rgba(78, 115, 223, 1)",
+                            pointRadius: 3,
+                            pointBackgroundColor: "rgba(78, 115, 223, 1)",
+                            pointBorderColor: "rgba(78, 115, 223, 1)",
+                            pointHoverRadius: 3,
+                            pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+                            pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+                            pointHitRadius: 10,
+                            pointBorderWidth: 2,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        legend: {
+                            display: false
+                        },
+                        maintainAspectRatio: false,
+                        layout: {
+                            padding: {
+                                left: 10,
+                                right: 25,
+                                top: 25,
+                                bottom: 0
+                            }
+                        },
+                        scales: {
+                            xAxes: [{
+                                type: 'time',
+                                time: {
+                                    parser: 'YYYY-MM-DD'
+                                }
+                            }]
+                        },
+                        tooltips: {
+                            backgroundColor: "rgb(255,255,255)",
+                            bodyFontColor: "#858796",
+                            titleMarginBottom: 10,
+                            titleFontColor: '#6e707e',
+                            titleFontSize: 14,
+                            borderColor: '#dddfeb',
+                            borderWidth: 1,
+                            xPadding: 15,
+                            yPadding: 15,
+                            displayColors: false,
+                            intersect: false,
+                            mode: 'index',
+                            caretPadding: 10
+                        }
+                    }
+                }
+            }
+        ]
+        </script>
+    @endif
+@endpush
+
 @section('content')
 <div class="container">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -58,45 +126,20 @@
             <div class="card shadow">
                 <div class="card-header">
                     <h6 class="my-1 font-weight-bold">
-                        @lang('Editions')
+                        @lang('Helpers')
                     </h6>
                 </div>
 
                 <div class="card-body">
-                    @if ($editions->isNotEmpty())
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <tbody>
-                                    @foreach ($editions as $edition)
-                                        <tr>
-                                            <td>{{ $edition->id }}</td>
-                                            <td>{{ $edition->trail_date->isoFormat('LL') }}</td>
-                                            <td class="text-right">
-                                                <a href="{{ route('edition.edit', ['edition' => $edition]) }}" class="btn btn-secondary" role="button">
-                                                    <i class="fas fa-edit"></i><span class="d-none d-sm-inline"> {{  __('Edit') }}</span>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    @else
-                        <div class="alert alert-light" role="alert">
-                            {{ __('No editions yet. Create one!') }}
-                        </div>
-                    @endif
-                    <div>
-                        <a href="{{ route('edition.create') }}" class="btn btn-primary btn-lg btn-block" role="button" >
-                            <i class="fas fa-plus"></i> {{  __('Add one') }}
-                        </a>
+                    <div class="chart-area">
+                        <canvas id="helpersGraphCanvas"></canvas>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="d-none d-lg-block col-lg-6 mb-4">
+        <div class="d-none d-lg-flex col-lg-6 mb-4 align-items-stretch">
             <!-- Illustrations -->
-            <div class="card shadow mb-4">
+            <div class="card shadow flex-fill">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold">
                       {{ config('app.name', 'Laravel') }}
