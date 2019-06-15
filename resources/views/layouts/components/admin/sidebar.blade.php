@@ -26,6 +26,13 @@
     </div>
 
     <li class="nav-item active">
+        <a class="nav-link" href="{{ route('admin.editions') }}">
+            <i class="fas fa-fw fa-running"></i>
+            <span>@lang("View")</span>
+        </a>
+    </li>
+
+    <li class="nav-item active">
         <a class="nav-link" href="{{ route('edition.create') }}">
             <i class="fas fa-fw fa-plus"></i>
             <span>@lang("Add one")</span>

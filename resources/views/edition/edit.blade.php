@@ -70,7 +70,7 @@
                                     </button>
                                 </div>
                                 <div class="col-6 col-md-3">
-                                    <a href="{{ route('admin.home') }}" class="btn btn-light btn-block" role="button">
+                                    <a href="{{ route('admin.editions') }}" class="btn btn-light btn-block" role="button">
                                         <i class="fas fa-times"></i> {{  __('Cancel') }}
                                     </a>
                                 </div>

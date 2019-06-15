@@ -27,7 +27,9 @@ class EditionController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.editions', [
+            "editions" => Edition::orderBy('id', 'DESC')->paginate(20)
+        ]);
     }
 
     /**
