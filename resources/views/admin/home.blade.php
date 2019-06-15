@@ -131,7 +131,7 @@
                 </div>
 
                 <div class="card-body">
-                    <div class="chart-area">
+                    <div class="chart-area" style="min-height: 20rem;">
                         <canvas id="helpersGraphCanvas"></canvas>
                     </div>
                 </div>
