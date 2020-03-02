@@ -50,7 +50,8 @@ class AdminController extends Controller
             );
             $today = (object) [];
             $today->x = Carbon::now()->format('Y-m-d');
-            $today->y = $data->last()->y;
+            $today->y = $data->isNotEmpty() ? $data->last()->y : 0;
+
             $data->push($today);
         }
         else {

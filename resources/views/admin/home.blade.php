@@ -72,7 +72,9 @@
 <div class="container">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-4 text-gray-600">@lang('Administration')</h1>
-        <a href="{{ route('admin.export', ['edition' => $current_edition]) }}" class="btn btn-primary"><i class="fas fa-download"></i> @lang("Export Helpers")</a>
+        @if ($current_edition != null)
+            <a href="{{ route('admin.export', ['edition' => $current_edition]) }}" class="btn btn-primary"><i class="fas fa-download"></i> @lang("Export Helpers")</a>
+        @endif
     </div>
     <div class="row">
         <div class="d-none d-lg-block col-lg-4 col-md-6 mb-4">
