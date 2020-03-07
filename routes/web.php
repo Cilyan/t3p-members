@@ -17,6 +17,8 @@ Route::get('/account', 'HomeController@account')->name('account');
 Route::group(['prefix' => 'auth'], function() {
     Auth::routes(['verify' => true]);
 
+    Route::get('/welcome', 'Auth\LoginController@welcome')->name('welcome');
+
     Route::get('/login/{provider}', 'Auth\SocialLoginController@redirect')->name('login.social');
 
     Route::get('/login/{provider}/callback', 'Auth\SocialLoginController@callback');
