@@ -72,6 +72,11 @@ class Profile extends Model
         );
     }
 
+    public function helpers_latest()
+    {
+        return $this->helpers()->latest()->first();
+    }
+
     public function slug() {
         return Str::slug($this->first_name . " " . $this->last_name . " " . $this->id);
     }

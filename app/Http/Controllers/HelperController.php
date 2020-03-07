@@ -51,6 +51,17 @@ class HelperController extends Controller
             $helper->legal_age = true;
         }
 
+        // Try to prefill form with data from last edition
+        $last_helper = $profile->helpers_latest();
+        if ($last_helper) {
+            $helper->phone_provider = $last_helper->phone_provider;
+            $helper->driving_license = $last_helper->driving_license;
+            $helper->driving_license_location = $last_helper->driving_license_location;
+            $helper->prefered_activity = $last_helper->prefered_activity;
+            $helper->prefered_sector = $last_helper->prefered_sector;
+            $helper->housing = $last_helper->housing;
+        }
+
         $in_wizard = $request->input('wizard', true);
 
         return view('helper.edit', compact('edit', 'helper', 'profile', 'edition', 'in_wizard'));
