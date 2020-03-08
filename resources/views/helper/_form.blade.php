@@ -6,7 +6,10 @@
 
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="phone">{{ __('Phone') }}</label>
+            <label for="phone">
+                {{ __('Phone') }}
+                <a href="#" class="text-danger" data-toggle="tooltip" title="@lang("This is a recall of the phone number you registered with your profile. You can change it by modifying your profile.")"><i class="fas fa-question-circle"></i></a>
+            </label>
             <input id="phone" type="text" class="form-control" name="phone" value="{{ $profile->phone }}" disabled>
         </div>
 
