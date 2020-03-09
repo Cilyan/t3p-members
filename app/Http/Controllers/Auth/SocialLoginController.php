@@ -6,6 +6,7 @@ use Socialite;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\RedirectsUsers;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -93,7 +94,7 @@ class SocialLoginController extends Controller
                 /* with a mail it doesn't own, and then waits for the real */
                 /* owner to log in using social account. */
                 if (!$user->hasVerifiedEmail()) {
-                    $user->password = Hash::make(str_random(256));
+                    $user->password = Hash::make(Str::random(256));
                     $user->save();
                     $user->markEmailAsVerified();
                     $passwordWasReset = true;
@@ -102,7 +103,7 @@ class SocialLoginController extends Controller
             else {
                 $user = new User();
                 $user->name = $socialUserObject->getName();
-                $user->password = Hash::make(str_random(256));
+                $user->password = Hash::make(Str::random(256));
                 $user->email = $socialUserObject->getEmail();
                 $user->save();
                 $user->markEmailAsVerified();
