@@ -14,10 +14,9 @@ class CreateHelperTable extends Migration
     public function up()
     {
         Schema::create('helper', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
 
-            $table->integer('profile_id')->unsigned()->index();
-            $table->foreign('profile_id')->references('id')->on('profiles')->onDelete('cascade');
+            $table->foreignId('profile_id')->index()->constrained()->onDelete('cascade');
             $table->integer('edition_id')->unsigned()->index();
             $table->foreign('edition_id')->references('id')->on('editions')->onDelete('cascade');
 
