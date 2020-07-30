@@ -6,7 +6,7 @@ use App\Profile;
 use App\Edition;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProfileRequest;
-use Propaganistas\LaravelIntl\Facades\Country;
+use Monarobase\CountryList\CountryListFacade as CountryList;
 
 class ProfileController extends Controller
 {
@@ -35,7 +35,7 @@ class ProfileController extends Controller
         $edit = false;
         $first_profile = auth()->user()->profiles()->count() == 0 ? true : false;
         $in_wizard = true;
-        $countries = Country::all();
+        $countries = CountryList::getList('fr', 'php');
         return view('profile.edit', compact('edit', 'profile', 'first_profile', 'in_wizard', 'countries'));
     }
 
@@ -82,7 +82,8 @@ class ProfileController extends Controller
             }
         )->get();
         $helpers = $profile->helpers_active()->with('edition')->get();
-        return view('profile.show', compact('profile', 'editions', 'helpers'));
+        $profile_country = CountryList::getOne($profile->country, 'fr');
+        return view('profile.show', compact('profile', 'editions', 'helpers', 'profile_country'));
     }
 
     /**
@@ -96,7 +97,7 @@ class ProfileController extends Controller
         $edit = true;
         $first_profile = false;
         $in_wizard = $request->input('wizard', false);
-        $countries = Country::all();
+        $countries = CountryList::getList('fr', 'php');
         return view('profile.edit', compact('edit', 'profile', 'first_profile', 'in_wizard', 'countries'));
     }
 

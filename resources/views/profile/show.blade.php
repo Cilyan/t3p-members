@@ -35,7 +35,7 @@
                                             @if($profile->thoroughfare){{ $profile->thoroughfare }}<br>@endif
                                             @if($profile->premise){{ $profile->premise }}<br>@endif
                                             @if($profile->postal_code || $profile->locality || $profile->administrative_area){{ $profile->postal_code }} {{ $profile->locality }} {{ $profile->administrative_area }}<br>@endif
-                                            {{ country($profile->country) }} <br/>
+                                            {{ $profile_country }} <br/>
                                             @if($profile->phone) {{ $profile->phone }} @endif
                                         </p>
                                     </div>

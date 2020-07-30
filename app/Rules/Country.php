@@ -3,7 +3,7 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use Propaganistas\LaravelIntl\Facades\Country as CountryList;
+use Monarobase\CountryList\CountryListFacade as CountryList;
 
 class Country implements Rule
 {
@@ -26,7 +26,7 @@ class Country implements Rule
      */
     public function passes($attribute, $value)
     {
-        return array_key_exists($value, CountryList::all());
+        return array_key_exists($value, CountryList::getList('fr', 'php'));
     }
 
     /**
