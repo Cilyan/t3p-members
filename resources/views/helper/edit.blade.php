@@ -19,6 +19,9 @@
             @lang('In order to properly organize, we need a few more information.')
             @lang('Please note that the driving license is important for us to declare at the prefecture. Fill the field if you can.')
         </p>
+        <p class="text-danger">
+            @lang('HINT: This year, the trail happens on <strong>Saturday</strong> June 26.')
+        <p/>
     </div>
 
     @include('helper._form')
