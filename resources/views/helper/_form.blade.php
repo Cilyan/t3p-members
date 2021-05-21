@@ -106,7 +106,7 @@
             </span>
         @endif
     </div>
-
+@if (0) {{-- Covid-19: We can no longer offer meals at the moment --}}
     <div class="form-check mt-2">
         <input id="day_before_meal" type="hidden" name="day_before_meal" value="0">
         <input id="day_before_meal" type="checkbox" class="form-check-input{{ $errors->has('day_before_meal') ? ' is-invalid' : '' }}" name="day_before_meal" value="1" {{ old('day_before_meal', $helper->day_before_meal ?? null) ? 'checked' : '' }}>
@@ -132,7 +132,7 @@
             </span>
         @endif
     </div>
-
+@endif
     <div class="form-group">
         <label for="prefered_activity">{{ __('Prefered Activity') }}</label>
         <select id="prefered_activity" class="form-control{{ $errors->has('prefered_activity') ? ' is-invalid' : '' }}" name="prefered_activity">

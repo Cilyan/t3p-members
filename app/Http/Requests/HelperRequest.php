@@ -50,4 +50,18 @@ class HelperRequest extends FormRequest
 
         return $rules;
     }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        /* Covid-19: We can no longer offer meals at the moment */
+        $this->merge([
+            'day_before_meal' => false,
+            'after_event_meal' => false
+        ]);
+    }
 }
