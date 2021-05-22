@@ -25,8 +25,10 @@
                     },
                     options: {
                         responsive: true,
-                        legend: {
-                            display: false
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
                         },
                         maintainAspectRatio: false,
                         layout: {

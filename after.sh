@@ -24,3 +24,12 @@
 # Install Node.js v10.x
 #curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 #sudo apt-get install -y nodejs
+
+echo 'phpmyadmin phpmyadmin/dbconfig-install boolean false' | sudo debconf-set-selections
+echo 'phpmyadmin phpmyadmin/reconfigure-webserver multiselect ' | sudo debconf-set-selections
+sudo apt-get -y install phpmyadmin
+sudo bash -c 'cat << EOF > /etc/phpmyadmin/conf.d/tmpdir.inc.php
+<?php
+\$cfg['TempDir'] = '/tmp/phpmyadmin';
+
+EOF'
