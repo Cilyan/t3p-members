@@ -13,27 +13,41 @@ class ProfilesTable extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $search = '';
-    public $filterHelpers = 'all';
+    public $only = 'all';
+
+    protected $rules = [
+        'only' => 'in:all,helpers,not-helpers',
+    ];
+
+    protected $queryString = [
+        'search' => ['except' => ''],
+        'only' => ['except' => 'all'],
+    ];
 
     public function updatingSearch()
     {
         $this->resetPage();
     }
 
-    public function onFilterHelpersChange()
+    public function updatedOnly($value)
     {
-        switch ($this->filterHelpers) {
+        $this->validateOnly('only');
+    }
+
+    public function onOnlyChange()
+    {
+        switch ($this->only) {
             case 'all':
-                $this->filterHelpers = 'helpers';
+                $this->only = 'helpers';
                 break;
             case 'helpers':
-                $this->filterHelpers = 'not_helpers';
+                $this->only = 'not-helpers';
                 break;
-            case 'not_helpers':
-                $this->filterHelpers = 'all';
+            case 'not-helpers':
+                $this->only = 'all';
                 break;
             default:
-                $this->filterHelpers = 'all';
+                $this->only = 'all';
                 break;
         }
         $this->resetPage();
@@ -49,10 +63,10 @@ class ProfilesTable extends Component
                 });
         });
 
-        if ($this->filterHelpers == 'helpers') {
+        if ($this->only == 'helpers') {
             $profilesQuery = $profilesQuery->has('helpers_active');
         }
-        elseif ($this->filterHelpers == 'not_helpers') {
+        elseif ($this->only == 'not-helpers') {
             $profilesQuery = $profilesQuery->doesntHave('helpers_active');
         }
         else {

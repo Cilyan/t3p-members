@@ -14,6 +14,10 @@ class AccountsTable extends Component
 
     public $search = '';
 
+    protected $queryString = [
+        'search' => ['except' => ''],
+    ];
+
     public function updatingSearch()
     {
         $this->resetPage();

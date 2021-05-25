@@ -8,15 +8,15 @@
             @php
                 $btn_class = "btn btn-light btn-block border-dark";
                 $i_class = "fas fa-life-ring text-gray-400";
-                if ($filterHelpers == "helpers") {
+                if ($only == "helpers") {
                     $btn_class = "btn btn-success btn-block";
                     $i_class = "fas fa-check";
-                } elseif ($filterHelpers == "not_helpers") {
+                } elseif ($only == "not-helpers") {
                     $btn_class = "btn btn-danger btn-block";
                     $i_class = "fas fa-times";
                 }
             @endphp
-            <button wire:click="onFilterHelpersChange" class="{{ $btn_class }}">
+            <button wire:click="onOnlyChange" class="{{ $btn_class }}">
                 <i class="{{ $i_class }}"></i>
                 @lang("Helpers")
             </button>
