@@ -80,9 +80,7 @@ class AdminController extends Controller
      */
     public function profiles()
     {
-        return view('admin.profiles', [
-            "profiles" => Profile::orderBy('last_name')->orderBy('first_name')->paginate(20)
-        ]);
+        return view('admin.profiles');
     }
 
     /**
@@ -92,8 +90,6 @@ class AdminController extends Controller
      */
     public function accounts()
     {
-        return view('admin.accounts', [
-            "accounts" => User::orderBy('name')->paginate(20)
-        ]);
+        return view('admin.accounts');
     }
 }
