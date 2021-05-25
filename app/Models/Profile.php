@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use App\User;
-use App\Helper;
-use App\Edition;
+use App\Models\User;
+use App\Models\Helper;
+use App\Models\Edition;
 use Carbon\Carbon;
 
 class Profile extends Model

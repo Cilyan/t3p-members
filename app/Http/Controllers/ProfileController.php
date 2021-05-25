@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Profile;
-use App\Edition;
+use App\Models\Profile;
+use App\Models\Edition;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProfileRequest;
 use Monarobase\CountryList\CountryListFacade as CountryList;

@@ -2,8 +2,8 @@
 
 namespace App\Exports;
 
-use App\Edition;
-use App\Helper;
+use App\Models\Edition;
+use App\Models\Helper;
 use App\Data\HelperData;
 use Propaganistas\LaravelPhone\PhoneNumber;
 use Illuminate\Contracts\Support\Responsable;

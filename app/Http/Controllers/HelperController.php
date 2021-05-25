@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Helper;
-use App\Profile;
-use App\Edition;
+use App\Models\Helper;
+use App\Models\Profile;
+use App\Models\Edition;
 use Illuminate\Http\Request;
 use App\Http\Requests\HelperRequest;
 

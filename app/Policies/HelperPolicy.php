@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\User;
-use App\Helper;
+use App\Models\User;
+use App\Models\Helper;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class HelperPolicy

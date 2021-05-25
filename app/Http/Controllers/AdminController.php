@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use App\Edition;
-use App\Profile;
+use App\Models\User;
+use App\Models\Edition;
+use App\Models\Profile;
 use App\Exports\HelpersExport;
 use Carbon\Carbon;
 

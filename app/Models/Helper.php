@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
-use App\Profile;
-use App\Edition;
+use App\Models\Profile;
+use App\Models\Edition;
 
 class Helper extends Pivot
 {

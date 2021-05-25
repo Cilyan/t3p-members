@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\User;
-use App\Edition;
+use App\Models\User;
+use App\Models\Edition;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class EditionPolicy

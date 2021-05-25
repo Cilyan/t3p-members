@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\RedirectsUsers;
 use App\Http\Controllers\Controller;
-use App\User;
-use App\SocialLogin;
+use App\Models\User;
+use App\Models\SocialLogin;
 
 
 class SocialLoginController extends Controller
