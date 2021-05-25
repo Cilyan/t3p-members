@@ -13,6 +13,7 @@
         "laravel/socialite": "^5.0",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.0",
+        "livewire/livewire": "^2.4",
         "maatwebsite/excel": "^3.1",
         "monarobase/country-list": "^3.1.0",
         "propaganistas/laravel-phone": "^4.2.3",

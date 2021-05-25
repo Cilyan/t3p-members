@@ -4,6 +4,10 @@
     <script src="{{ asset('js/admin.js') }}" defer></script>
 @endpush
 
+@push('styles')
+    <livewire:styles />
+@endpush
+
 @section('app')
 <body>
     <!-- Page Wrapper -->
@@ -27,5 +31,6 @@
         </div>
     </div>
     @stack('admin-scripts')
+    <livewire:scripts />
 </body>
 @endsection
