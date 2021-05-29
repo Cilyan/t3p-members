@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Edition;
 use App\Models\Profile;
@@ -91,5 +90,18 @@ class AdminController extends Controller
     public function accounts()
     {
         return view('admin.accounts');
+    }
+
+    /**
+     * Display the specified user's home page.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function account(User $user)
+    {
+        return view('home', [
+            "user" => $user,
+            "profiles" => $user->profiles
+        ]);
     }
 }

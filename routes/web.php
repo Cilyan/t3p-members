@@ -50,3 +50,5 @@ Route::get('/admin/helpers/{edition}/export', [AdminController::class,   'export
 Route::get('/admin/profiles',                 [AdminController::class,   'profiles'])->name('admin.profiles');
 Route::get('/admin/accounts',                 [AdminController::class,   'accounts'])->name('admin.accounts');
 Route::get('/admin/editions',                 [EditionController::class, 'index'])->name('admin.editions');
+
+Route::get('/account/{user}',                 [AdminController::class,   'account'])->name('account.show');

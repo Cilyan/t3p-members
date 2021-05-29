@@ -9,7 +9,7 @@
 
             <div class="list-group list-group-flush">
                 @foreach ($accounts as $account)
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route("account.show", ["user" => $account]) }}" class="list-group-item list-group-item-action">
                     <div class="row">
                         <div class="col-md-2 text-center">
                             <img class="img-fluid rounded-circle bg-white p-1" style="width: 4rem;" src="https://robohash.org/{{ $account->email }}?gravatar=yes&amp;set=set4&amp;size=128x128" alt="">
