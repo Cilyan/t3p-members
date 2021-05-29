@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Laravel\Socialite\Facades\Socialite;
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use Illuminate\Foundation\Auth\RedirectsUsers;
-use App\Http\Controllers\Controller;
 use App\Models\User;
+
 use App\Models\SocialLogin;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Foundation\Auth\RedirectsUsers;
 
 
 class SocialLoginController extends Controller
@@ -38,6 +39,8 @@ class SocialLoginController extends Controller
         if (empty($providerClientId)) {
             abort(404);
         }
+        
+        session()->put('lang', App::currentLocale());
         return Socialite::driver($provider)->redirect();
     }
 
@@ -55,6 +58,13 @@ class SocialLoginController extends Controller
         if (empty($providerClientId)) {
             abort(404);
         }
+
+        App::setLocale(
+            $request->session()->pull(
+                'lang',
+                config('app.locale')
+            )
+        );
 
         if (empty($request->input("code"))) {
             return redirect()->route("register")
@@ -76,7 +86,9 @@ class SocialLoginController extends Controller
             // try to find user by email, or create one
             if (!$socialUserObject->getEmail()) {
                 if ($provider == 'facebook') {
-                    return Socialite::driver('facebook')->with(['auth_type' => 'rerequest'])->redirect();
+                    return Socialite::driver('facebook')->with(
+                        ['auth_type' => 'rerequest']
+                    )->redirect();
                 }
                 else {
                     abort(505, "Email not provided");
@@ -88,11 +100,11 @@ class SocialLoginController extends Controller
                 ->first();
 
             if (!empty($user)) {
-                /* Verify that user verified their email. */
-                /* If they didn't, invalidate password. */
+                /* Verify that user verified their email.                    */
+                /* If they didn't, invalidate password.                      */
                 /* This is done to prevent that someone registers an account */
-                /* with a mail it doesn't own, and then waits for the real */
-                /* owner to log in using social account. */
+                /* with a mail it doesn't own, and then waits for the real   */
+                /* owner to log in using social account.                     */
                 if (!$user->hasVerifiedEmail()) {
                     $user->password = Hash::make(Str::random(256));
                     $user->save();

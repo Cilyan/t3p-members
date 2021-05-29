@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Profile;
 use App\Models\Edition;
+use App\Models\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use App\Http\Requests\ProfileRequest;
 use Monarobase\CountryList\CountryListFacade as CountryList;
 
@@ -35,7 +36,7 @@ class ProfileController extends Controller
         $edit = false;
         $first_profile = auth()->user()->profiles()->count() == 0 ? true : false;
         $in_wizard = true;
-        $countries = CountryList::getList('fr', 'php');
+        $countries = CountryList::getList(App::currentLocale(), 'php');
         return view('profile.edit', compact('edit', 'profile', 'first_profile', 'in_wizard', 'countries'));
     }
 
@@ -82,7 +83,7 @@ class ProfileController extends Controller
             }
         )->get();
         $helpers = $profile->helpers_active()->with('edition')->get();
-        $profile_country = CountryList::getOne($profile->country, 'fr');
+        $profile_country = CountryList::getOne($profile->country, App::currentLocale());
         return view('profile.show', compact('profile', 'editions', 'helpers', 'profile_country'));
     }
 
@@ -97,7 +98,7 @@ class ProfileController extends Controller
         $edit = true;
         $first_profile = false;
         $in_wizard = $request->input('wizard', false);
-        $countries = CountryList::getList('fr', 'php');
+        $countries = CountryList::getList(App::currentLocale(), 'php');
         return view('profile.edit', compact('edit', 'profile', 'first_profile', 'in_wizard', 'countries'));
     }
 
