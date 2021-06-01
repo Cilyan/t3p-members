@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Edition;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -27,10 +29,7 @@ class HomeController extends Controller
         if (auth()->user()->profiles()->count() == 0) {
             return redirect()->route('profile.create');
         }
-        return view('home', [
-            "user" => auth()->user(),
-            "profiles" => auth()->user()->profiles()->with("helpers_active")->get()
-        ]);
+        return $this->participants_view(auth()->user());
     }
 
     /**
@@ -40,9 +39,22 @@ class HomeController extends Controller
      */
     public function account()
     {
+        return $this->participants_view(auth()->user()); // Temporary
+    }
+
+    public function participants_view(User $user) {
+        $editions = function ($profile) {
+            return Edition::active_for_helpers()->whereDoesntHave(
+                'all_helpers',
+                function ($query) use ($profile) {
+                    $query->where('profile_id', $profile->id);
+                }
+            )->get();
+        };
         return view('home', [
-            "user" => auth()->user(),
-            "profiles" => auth()->user()->profiles
+            "user" => $user,
+            "profiles" => $user->profiles()->with("helpers_active")->get(),
+            "editions" => $editions
         ]);
     }
 }

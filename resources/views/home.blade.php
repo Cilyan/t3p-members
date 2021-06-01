@@ -21,34 +21,39 @@
 
                     <div class="list-group list-group-flush">
                         @foreach ($profiles as $profile)
-                        <a href="{{ route("profile.show", ["profile" => $profile]) }}" class="list-group-item list-group-item-action">
+                        <div class="list-group-item list-group-item-action">
                             <div class="row">
-                                <div class="col-md-3 text-center">
+                                <a href="{{ route("profile.show", ["profile" => $profile]) }}" class="stretched-link"></a>
+                                <div class="col-md-2 text-center">
                                     <img class="img-fluid rounded-circle bg-white p-1" style="width: 4rem;" src="https://robohash.org/{{ $profile->slug() }}?set=set4&amp;size=128x128" alt="">
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-10">
                                     <div class="m-1">
-                                        <h6 class="font-weight-bold text-center text-md-left text-primary">{{ $profile->full_name() }}</h6>
-                                        @php
-                                            $helpers = $profile->helpers_active;
-                                        @endphp
-                                        @if($helpers->count() > 0)
-                                            @foreach ($helpers as $helper)
-                                            <p class="m-0">
-                                                <i class="fas fa-check text-success"></i>
-                                                @lang("Registered as helper for the :edition edition!", ["edition" => $helper->edition_id])
-                                            </p>
-                                            @endforeach
-                                        @else
-                                            <p class="m-0">
-                                                <i class="fas fa-life-ring text-gray-400"></i> 
-                                                @lang("Currently not registered as helper.")
-                                            </p>
-                                        @endif
+                                        <h6 class="font-weight-bold text-center text-md-left text-primary">
+                                            {{ $profile->full_name() }}
+                                            <small class="float-none float-md-right"><i class="fas fa-edit"></i> @lang("Edit")</small>
+                                        </h6>
+                                        @foreach ($profile->helpers_active as $helper)
+                                        <p class="m-0">
+                                            <i class="fas fa-check text-success"></i>
+                                            @lang("Registered as helper for the :edition edition!", ["edition" => $helper->edition_id])
+                                        </p>
+                                        @endforeach
+                                        @foreach ($editions($profile) as $edition)
+                                        <p class="mb-0">
+                                            <i class="fas fa-lightbulb text-warning"></i>
+                                            @lang("Subscriptions are opened for the edition of the :edition", ["edition" => $edition->trail_date->isoFormat('LL') ])
+                                        </p>
+                                        <p class="text-right">
+                                            <a href="{{ route('helper.create', ['profile' => $profile, 'edition' => $edition, 'wizard' => false]) }}" class="text-primary position-relative" style="z-index: 5;">
+                                                <i class="fas fa-life-ring"></i> {{  __('Be helper') }}
+                                            </a>
+                                        </p>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                         @endforeach
                     </div>
 

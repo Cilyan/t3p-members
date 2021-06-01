@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Edition;
 use App\Models\Profile;
 use App\Exports\HelpersExport;
-use Carbon\Carbon;
+use App\Http\Controllers\HomeController;
 
 class AdminController extends Controller
 {
@@ -99,9 +100,6 @@ class AdminController extends Controller
      */
     public function account(User $user)
     {
-        return view('home', [
-            "user" => $user,
-            "profiles" => $user->profiles
-        ]);
+        return (new HomeController)->participants_view($user);
     }
 }
